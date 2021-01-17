@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 
-const HeaderDesktop = styled.div`
+const HeaderDiv = styled.div`
     width:100%;height:50px;border:1px solid #000;
 
     .headerInner {
@@ -17,12 +17,9 @@ const HeaderDesktop = styled.div`
         text-decoration:none;color:black;
     }
 `;
-
 const Logo = styled.div`
     width:100px;height:50px;border:1px solid #000;float:left;
 `;
-
-
 const MenuWrapperDesktop = styled.div`
     width:200px;height:50px;border:1px solid #000;float:right;
 
@@ -33,7 +30,24 @@ const MenuWrapperDesktop = styled.div`
         display:inline-block;margin-left;20px;margin-right:20px;
     }
 `;
-
+const MobileLine = styled.div`
+    // cursor:pointer;
+    width:35px;
+    height:25px;
+    position:relative;
+    top:6px;
+    float:right;
+    display:block;
+    .line {
+        background:black;
+        margin-top:7px;
+        margin-bottom:6px;
+        width:35px;
+        height:3px; 
+        border-radius:2px;
+        position:relative;
+    }
+`;
 const MenuWrapperMobile = styled.div`
     width:50%;height:100%;position:fixed;top:0px;right:0px;background:red;display:none;
     @media (max-width: 521px) {
@@ -56,6 +70,7 @@ const style = {
 const Header = ({menuText}) => {
     const [mobileShow, setMobileShow] = useState(false);
     const mobileShowEvent = useCallback(()=>{
+        console.log('hi');
         setMobileShow(!mobileShow); 
     });
     useEffect(()=>{
@@ -63,9 +78,9 @@ const Header = ({menuText}) => {
     },[]);
 
     return (
-        <HeaderDesktop>
+        <HeaderDiv>
             <div className="headerInner">
-                <Logo onClick={mobileShowEvent} />
+                <Logo />
                 <MenuWrapperDesktop>
                     {menuText.map(v => (
                         <Link href={v.src} rel="noopener noreferrer" target="_blank">
@@ -75,7 +90,12 @@ const Header = ({menuText}) => {
                         </Link>
                     ))}
                 </MenuWrapperDesktop>
-                
+                <MobileLine onClick={mobileShowEvent}  >
+                    <div className="line"></div>
+                    <div className="line"></div>
+                    <div className="line"></div>
+                </MobileLine>
+
                 <MenuWrapperMobile style={Object.assign({}, style.default, !mobileShow && style.show)}>
                     {menuText.map(v => (
                         <Link href={v.src} rel="noopener noreferrer" target="_blank">
@@ -86,7 +106,7 @@ const Header = ({menuText}) => {
                     ))}
                 </MenuWrapperMobile>
             </div>
-        </HeaderDesktop>
+        </HeaderDiv>
     )
 }
 
