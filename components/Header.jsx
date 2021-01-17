@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -13,11 +13,15 @@ const HeaderDesktop = styled.div`
             width:100%;overflow:hidden; 
         }
     }
+    a{
+        text-decoration:none;color:black;
+    }
 `;
 
 const Logo = styled.div`
     width:100px;height:50px;border:1px solid #000;float:left;
 `;
+
 
 const MenuWrapperDesktop = styled.div`
     width:200px;height:50px;border:1px solid #000;float:right;
@@ -25,7 +29,7 @@ const MenuWrapperDesktop = styled.div`
     @media (max-width: 520px) {
         display:none;
     }
-    .p{
+    p{
         display:inline-block;margin-left;20px;margin-right:20px;
     }
 `;
@@ -35,7 +39,7 @@ const MenuWrapperMobile = styled.div`
     @media (max-width: 521px) {
         display:block;
     }
-    .p{
+    p{
         display:block;margin:20px;
     }
 `;
@@ -49,27 +53,37 @@ const style = {
     }
 };
 
-const Header = (menuText) => {
+const Header = ({menuText}) => {
     const [mobileShow, setMobileShow] = useState(false);
     const mobileShowEvent = useCallback(()=>{
         setMobileShow(!mobileShow); 
     });
-
+    useEffect(()=>{
+        console.log(menuText);
+    },[]);
 
     return (
         <HeaderDesktop>
             <div className="headerInner">
                 <Logo onClick={mobileShowEvent} />
                 <MenuWrapperDesktop>
-                    <p className="p">HOME</p>
-                    <p className="p">로그인</p>
-                    <p className="p">Setting</p>
+                    {menuText.map(v => (
+                        <Link href={v.src} rel="noopener noreferrer" target="_blank">
+                            <a>
+                                <p>{v.text}</p>
+                            </a>
+                        </Link>
+                    ))}
                 </MenuWrapperDesktop>
                 
                 <MenuWrapperMobile style={Object.assign({}, style.default, !mobileShow && style.show)}>
-                    <p className="p">HOME</p>
-                    <p className="p">로그인</p>
-                    <p className="p">Setting</p>
+                    {menuText.map(v => (
+                        <Link href={v.src} rel="noopener noreferrer" target="_blank">
+                            <a>
+                                <p>{v.text}</p>
+                            </a>
+                        </Link>
+                    ))}
                 </MenuWrapperMobile>
             </div>
         </HeaderDesktop>
@@ -77,7 +91,7 @@ const Header = (menuText) => {
 }
 
 Header.PropTypes = {
-    menuText : PropTypes.string.isRequired,
+    menuText : PropTypes.arrayOf.isRequired,
 }
 
 export default Header;
