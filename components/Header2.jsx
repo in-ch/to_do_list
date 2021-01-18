@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
+import SearchInput from './SearchInput.jsx';
 
 const HeaderDiv = styled.div`
     width:100%;height:50px;border:1px solid #000;
@@ -12,9 +12,6 @@ const HeaderDiv = styled.div`
         @media (max-width: 520px) {
             width:100%;overflow:hidden; 
         }
-    }
-    a{
-        text-decoration:none;color:black;
     }
 `;
 const Logo = styled.div`
@@ -49,7 +46,7 @@ const MobileLine = styled.div`
     }
 `;
 const MenuWrapperMobile = styled.div`
-    width:50%;height:100%;position:fixed;top:0px;right:0px;background:white;display:none;z-index:3;
+    width:80%;height:100%;position:fixed;top:0px;right:0px;background:white;display:none;z-index:3;
     @media (max-width: 521px) {
         display:block;
     }
@@ -57,13 +54,26 @@ const MenuWrapperMobile = styled.div`
         display:block;margin:20px;
     }
     .setting{
-        width:20px;height:20px;margin:10px;float:right;
+        width:20px;height:20px;margin:10px;margin-right:2px;float:right;
     }
     .x_icon{
-        width:27px;height:27px;margin:10px;float:left;position:relative;top:-3px;
+        width:27px;height:27px;margin:10px;float:right;position:relative;top:-4px;
+    }
+    input[type=button]{
+        background:none;border:0.2px solid white;color:white;margin:11px;font-size:0.4em;width:60px;height:25px;border-radius:10px;position:relative;top:-2px;
+    }
+    .gradient{
+        background: #4776E6;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #8E54E9, #4776E6);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #8E54E9, #4776E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        width:100%;
+        height:170px;
+        margin: 0;border:0;
+    }
+    p{
+        text-align:center;font-size:0.9em;color:white;line-height:1px;
     }
 `;
-
 
 const Cotton = styled.div`
     width:100%;height:100%;position:fixed;top:0px;left:0px;z-index:2;background:RGBA(0,0,0,0.2);display:none;
@@ -77,10 +87,9 @@ const style = {
         transition: '.25s all',
     },
     show : {
-        right: '-50%',
+        right: '-80%',
     },
 };
-
 
 const Header = ({menuText}) => {
     const [mobileShow, setMobileShow] = useState(false);
@@ -88,22 +97,20 @@ const Header = ({menuText}) => {
         setMobileShow(!mobileShow); 
     });
     useEffect(()=>{
-        console.log(menuText);
     },[]);
 
     return (
         <HeaderDiv>
             <div className="headerInner">
-                <Logo />
+                <Logo><h2>타임라인</h2></Logo>
                 <MenuWrapperDesktop>
                     {menuText.map((v,i) => (
-                        <Link href={v.src} key={o} rel="noopener noreferrer" target="_blank">
+                        <Link href={v.src} key={i} rel="noopener noreferrer" target="_blank">
                             <a>
                                 <p>{v.text}</p>
                             </a>
                         </Link>
                     ))}
-                    
 
                 </MenuWrapperDesktop>
                 {mobileShow&& <Cotton />}
@@ -113,10 +120,17 @@ const Header = ({menuText}) => {
                     <div className="line"></div>
                 </MobileLine>
 
+
                 <MenuWrapperMobile style={Object.assign({}, style.default, !mobileShow && style.show)}>
-                    <img className="setting" src="icons/setting.svg" />
-                    <img className="x_icon" onClick={mobileShowEvent} src="icons/x_icon.svg" />
-                    <br/><br/>
+                    <div className="gradient">
+                        <input type="button" value="가입하기"/>
+                        <img className="x_icon" onClick={mobileShowEvent} src="icons/x_icon.svg" />
+                        <img className="setting" src="icons/setting.svg" />
+                        <p>환영합니다.</p>
+                        <p>인사오지게 박습니다.</p>
+                        <SearchInput />
+                    </div>
+                    
                     {menuText.map((v,i) => (
                         <Link href={v.src} key={i} rel="noopener noreferrer" target="_blank">
                             <a>
@@ -131,7 +145,7 @@ const Header = ({menuText}) => {
 }
 
 Header.propTypes = {
-    menuText : PropTypes.arrayOf.isRequired,
+    menuText : PropTypes.array.isRequired,
 }
 
 export default Header;

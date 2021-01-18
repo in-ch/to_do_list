@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import Header from './Header.jsx';
+import Header2 from './Header2.jsx';
 
 const AppLayout = ({ children }) => {
     const menuText = [
@@ -11,14 +11,15 @@ const AppLayout = ({ children }) => {
     ]
     return (
         <>
-            <Header menuText={menuText}/>
+            <Header2 menuText={menuText}/>
             {children}
         </>
     );
 };
 
-AppLayout.PropTypes = {
+AppLayout.propTypes = {
     children: PropTypes.node.isRequired,
 };
+
 
 export default AppLayout;
