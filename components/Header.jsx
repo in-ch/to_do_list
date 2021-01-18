@@ -49,12 +49,26 @@ const MobileLine = styled.div`
     }
 `;
 const MenuWrapperMobile = styled.div`
-    width:50%;height:100%;position:fixed;top:0px;right:0px;background:red;display:none;
+    width:50%;height:100%;position:fixed;top:0px;right:0px;background:white;display:none;z-index:3;
     @media (max-width: 521px) {
         display:block;
     }
     p{
         display:block;margin:20px;
+    }
+    .setting{
+        width:20px;height:20px;margin:10px;float:right;
+    }
+    .x_icon{
+        width:27px;height:27px;margin:10px;float:left;position:relative;top:-3px;
+    }
+`;
+
+
+const Cotton = styled.div`
+    width:100%;height:100%;position:fixed;top:0px;left:0px;z-index:2;background:RGBA(0,0,0,0.2);display:none;
+    @media (max-width: 521px) {
+        display:block;
     }
 `;
 
@@ -64,13 +78,13 @@ const style = {
     },
     show : {
         right: '-50%',
-    }
+    },
 };
+
 
 const Header = ({menuText}) => {
     const [mobileShow, setMobileShow] = useState(false);
     const mobileShowEvent = useCallback(()=>{
-        console.log('hi');
         setMobileShow(!mobileShow); 
     });
     useEffect(()=>{
@@ -89,14 +103,21 @@ const Header = ({menuText}) => {
                             </a>
                         </Link>
                     ))}
+                    
+
                 </MenuWrapperDesktop>
+                {mobileShow&& <Cotton />}
                 <MobileLine onClick={mobileShowEvent}  >
                     <div className="line"></div>
                     <div className="line"></div>
                     <div className="line"></div>
                 </MobileLine>
 
+
                 <MenuWrapperMobile style={Object.assign({}, style.default, !mobileShow && style.show)}>
+                    <img className="setting" src="icons/setting.svg" />
+                    <img className="x_icon" onClick={mobileShowEvent} src="icons/x_icon.svg" />
+                    <br/><br/>
                     {menuText.map(v => (
                         <Link href={v.src} rel="noopener noreferrer" target="_blank">
                             <a>
