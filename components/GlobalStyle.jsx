@@ -9,7 +9,9 @@ const GlobalStyle = createGlobalStyle`
     a{
         text-decoration:none;color:black;
     }
-    
+    input,textarea{
+        outline:0;
+    }
 `;
 
 export default GlobalStyle;

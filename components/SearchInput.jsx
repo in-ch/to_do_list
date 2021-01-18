@@ -5,12 +5,13 @@ const Search = styled.div`
     width:80%;height:25px;margin:0 auto;padding-left:3%;padding-right:3%;margin-top:30px;outline:none;border-radius:10px;border:0;background:white;padding-top:6px;
 
     input[type=text] { 
-        outline:0;border:0;width:80%;position:relative;
+        outline:0;border:0;width:80%;position:relative;top:-4px;
     }
+    
 `;
 
 const SearchButton = styled.div`
-    width:20px;height:20px;display:inline-block;float:right;position:relative;;
+    width:20px;height:20px;display:inline-block;float:right;position:relative;
     background-repeat: no-repeat;background-position:center;background-size:cover;top:-1px;
 `;
 

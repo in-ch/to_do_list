@@ -35,6 +35,7 @@ const MobileLine = styled.div`
     top:6px;
     float:right;
     display:block;
+    margin-right:15px;
     .line {
         background:black;
         margin-top:7px;
@@ -46,7 +47,7 @@ const MobileLine = styled.div`
     }
 `;
 const MenuWrapperMobile = styled.div`
-    width:80%;height:100%;position:fixed;top:0px;right:0px;background:white;display:none;z-index:3;
+    width:80%;height:100%;position:fixed;top:0px;right:0px;background:white;display:none;z-index:3;overflow:hidden;
     @media (max-width: 521px) {
         display:block;
     }
@@ -67,11 +68,12 @@ const MenuWrapperMobile = styled.div`
         background: -webkit-linear-gradient(to right, #8E54E9, #4776E6);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to right, #8E54E9, #4776E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         width:100%;
-        height:170px;
+        height:22%;
         margin: 0;border:0;
+        z-index:2;
     }
     p{
-        text-align:center;font-size:0.9em;color:white;line-height:1px;
+        text-align:center;font-size:1.2em;color:white;line-height:5px;
     }
 `;
 
@@ -79,6 +81,32 @@ const Cotton = styled.div`
     width:100%;height:100%;position:fixed;top:0px;left:0px;z-index:2;background:RGBA(0,0,0,0.2);display:none;
     @media (max-width: 521px) {
         display:block;
+    }
+`;
+
+const SubMenu = styled.div`
+    width: 100%;height: 78%;background:white;position:relative;
+    div:nth-child(1){
+        width:30%;height:100%;display:inline-block;background:RGB(245,245,245);text-align:center;
+        a{
+            display:table;width:98%;height:70px;background:white;border-bottom:0.5px solid RGB(200,200,200);background:RGB(245,245,245);
+            box-shadow: none;border-right:0.2px solid RGB(200,200,200);
+        }
+        p{
+            width:100%;margin:0;height:70px;color:RGB(150,150,150);vertical-align:middle;display:table-cell;
+        }
+        .menuActiveA{
+            background:white;box-shadow: -5px 0px 0px 0px white, 5px 0px 0px 0px white;border-right:0;
+        }
+        .subSubMenu{
+            position:absolute;top:0px;right:0px;background:none;width:67%;height:100%;padding-top:20px;
+            h3{
+                position:relative;top:3px;
+            }
+            p{
+                text-align:left;
+            }
+        }
     }
 `;
 
@@ -96,8 +124,13 @@ const Header = ({menuText}) => {
     const mobileShowEvent = useCallback(()=>{
         setMobileShow(!mobileShow); 
     });
-    useEffect(()=>{
-    },[]);
+    const menuActive = useCallback((e) => {
+        if(e.target.className === ''){
+            e.target.className = 'menuActiveA';
+        } else {
+            e.target.className = '';
+        }
+    });
 
     return (
         <HeaderDiv>
@@ -120,7 +153,6 @@ const Header = ({menuText}) => {
                     <div className="line"></div>
                 </MobileLine>
 
-
                 <MenuWrapperMobile style={Object.assign({}, style.default, !mobileShow && style.show)}>
                     <div className="gradient">
                         <input type="button" value="가입하기"/>
@@ -130,14 +162,21 @@ const Header = ({menuText}) => {
                         <p>인사오지게 박습니다.</p>
                         <SearchInput />
                     </div>
+                    <SubMenu>
+                        <div>
+                            {menuText.map((v,i) => (
+                                <>
+                                    <a className="menuNoneActiveA" onClick={menuActive}>
+                                        <p key={i}>{v.text}</p>
+                                    </a>
+                                    <div className="subSubMenu">
+                                        <center><h3>{v.text}</h3></center>
+                                    </div>
+                                </>
+                            ))}
+                        </div>
+                    </SubMenu>
                     
-                    {menuText.map((v,i) => (
-                        <Link href={v.src} key={i} rel="noopener noreferrer" target="_blank">
-                            <a>
-                                <p>{v.text}</p>
-                            </a>
-                        </Link>
-                    ))}
                 </MenuWrapperMobile>
             </div>
         </HeaderDiv>
