@@ -38,6 +38,7 @@ const SearchInput = ({}) => {
             setClicked(false);
         }, 1500);
     });
+    
 
     return (
         <>

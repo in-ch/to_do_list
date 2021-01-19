@@ -89,14 +89,14 @@ const SubMenu = styled.div`
     div:nth-child(1){
         width:30%;height:100%;display:inline-block;background:RGB(245,245,245);text-align:center;
         a{
-            display:table;width:98%;height:70px;background:white;border-bottom:0.5px solid RGB(200,200,200);background:RGB(245,245,245);
-            box-shadow: none;border-right:0.2px solid RGB(200,200,200);
+            display:table;width:98%;height:70px;border-bottom:0.5px solid RGB(200,200,200);background:RGB(245,245,245);
+            box-shadow: none;border-right:0.2px solid RGB(200,200,200);transition: '.25s all',
         }
         p{
             width:100%;margin:0;height:70px;color:RGB(150,150,150);vertical-align:middle;display:table-cell;
         }
-        .menuActiveA{
-            background:white;box-shadow: -5px 0px 0px 0px white, 5px 0px 0px 0px white;border-right:0;
+        .menuActiveLink{
+            background:white;box-shadow: -5px 0px 0px 0px white, 5px 0px 0px 0px white;border-right:0;transition: '.25s all',
         }
         .subSubMenu{
             position:absolute;top:0px;right:0px;background:none;width:67%;height:100%;padding-top:20px;
@@ -119,18 +119,21 @@ const style = {
     },
 };
 
+function removeAllClass(classs){
+    for(let i =0;i<document.querySelectorAll(`p.${classs}`).length;i++){
+        document.querySelectorAll(`p.${classs}`)[i].className = ''
+    }
+}
 const Header = ({menuText}) => {
     const [mobileShow, setMobileShow] = useState(false);
     const mobileShowEvent = useCallback(()=>{
         setMobileShow(!mobileShow); 
     });
     const menuActive = useCallback((e) => {
-        if(e.target.className === ''){
-            e.target.className = 'menuActiveA';
-        } else {
-            e.target.className = '';
-        }
+        removeAllClass('menuActiveLink');
+        e.target.classList.toggle("menuActiveLink");
     });
+
 
     return (
         <HeaderDiv>
@@ -162,11 +165,11 @@ const Header = ({menuText}) => {
                         <p>인사오지게 박습니다.</p>
                         <SearchInput />
                     </div>
-                    <SubMenu>
+                    <SubMenu id="SubMenu">
                         <div>
                             {menuText.map((v,i) => (
                                 <>
-                                    <a className="menuNoneActiveA" onClick={menuActive}>
+                                    <a id="aTag" onClick={menuActive}>
                                         <p key={i}>{v.text}</p>
                                     </a>
                                     <div className="subSubMenu">
