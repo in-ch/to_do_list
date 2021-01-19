@@ -68,7 +68,7 @@ const MenuWrapperMobile = styled.div`
         background: -webkit-linear-gradient(to right, #8E54E9, #4776E6);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to right, #8E54E9, #4776E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         width:100%;
-        height:22%;
+        height:24%;
         margin: 0;border:0;
         z-index:2;
     }
@@ -84,30 +84,36 @@ const Cotton = styled.div`
     }
 `;
 
+
 const SubMenu = styled.div`
     width: 100%;height: 78%;background:white;position:relative;
     div:nth-child(1){
         width:30%;height:100%;display:inline-block;background:RGB(245,245,245);text-align:center;
         a{
-            display:table;width:98%;height:70px;border-bottom:0.5px solid RGB(200,200,200);background:RGB(245,245,245);
-            box-shadow: none;border-right:0.2px solid RGB(200,200,200);transition: '.25s all',
+            display:table;width:98%;height:70px;border-bottom:0.5px solid RGB(200,200,200);
+            border-right:0.2px solid RGB(200,200,200);
         }
         p{
             width:100%;margin:0;height:70px;color:RGB(150,150,150);vertical-align:middle;display:table-cell;
         }
-        .menuActiveLink{
-            background:white;box-shadow: -5px 0px 0px 0px white, 5px 0px 0px 0px white;border-right:0;transition: '.25s all',
-        }
         .subSubMenu{
-            position:absolute;top:0px;right:0px;background:none;width:67%;height:100%;padding-top:20px;
+            position:absolute;top:0px;right:0px;background:none;width:65%;height:100%;padding-top:20px;background:white;overflow:hidden;
             h3{
-                position:relative;top:3px;
+                color:#4776E6;
             }
+
             p{
-                text-align:left;
+                text-align:left;font-size:1.2em;height:30px;display:inline-block;
+            }
+            
+            img{
+                width:30px;display:inline-block;
             }
         }
     }
+`;
+const CustomBr = styled.div`
+    width:100%;height:1px;background:none;
 `;
 
 const style = {
@@ -117,21 +123,35 @@ const style = {
     show : {
         right: '-80%',
     },
+    aDefault : {
+    },
+    aClick : {
+    },
+    aClickOn : {
+        background:'white',color:'#4776E6',boxShadow: '-5px 0px 0px 0px white, 5px 0px 0px 0px white',transition: '.3s all',
+    },
 };
 
-function removeAllClass(classs){
-    for(let i =0;i<document.querySelectorAll(`p.${classs}`).length;i++){
-        document.querySelectorAll(`p.${classs}`)[i].className = ''
-    }
-}
+// function removeAllClass(classs){
+//     for(let i =0;i<document.querySelectorAll(`p.${classs}`).length;i++){
+//         document.querySelectorAll(`p.${classs}`)[i].className = '';
+//     }
+// }
+
 const Header = ({menuText}) => {
     const [mobileShow, setMobileShow] = useState(false);
+    const [subShow, setSubShow] = useState(0);
+
     const mobileShowEvent = useCallback(()=>{
         setMobileShow(!mobileShow); 
     });
-    const menuActive = useCallback((e) => {
-        removeAllClass('menuActiveLink');
-        e.target.classList.toggle("menuActiveLink");
+    const menuActive = useCallback((i) => {
+        setSubShow(i);
+
+        //removeAllClass('menuActiveLink');
+        // e.target.classList.toggle("menuActiveLink");
+        // changeAllClass('noneSubSubMenu');
+        // document.querySelector("div.subSubMenu").className = "noneSubSubMenu";
     });
 
 
@@ -147,7 +167,6 @@ const Header = ({menuText}) => {
                             </a>
                         </Link>
                     ))}
-
                 </MenuWrapperDesktop>
                 {mobileShow&& <Cotton />}
                 <MobileLine onClick={mobileShowEvent}  >
@@ -155,7 +174,6 @@ const Header = ({menuText}) => {
                     <div className="line"></div>
                     <div className="line"></div>
                 </MobileLine>
-
                 <MenuWrapperMobile style={Object.assign({}, style.default, !mobileShow && style.show)}>
                     <div className="gradient">
                         <input type="button" value="가입하기"/>
@@ -165,21 +183,32 @@ const Header = ({menuText}) => {
                         <p>인사오지게 박습니다.</p>
                         <SearchInput />
                     </div>
-                    <SubMenu id="SubMenu">
+                    <SubMenu>
                         <div>
                             {menuText.map((v,i) => (
                                 <>
-                                    <a id="aTag" onClick={menuActive}>
-                                        <p key={i}>{v.text}</p>
+                                    <a onClick={() => menuActive(i)}>
+                                        <p style={Object.assign({}, style.aDefault, subShow === i ? style.aClickOn : style.aClick) } key={i}>{v.text}</p>
                                     </a>
                                     <div className="subSubMenu">
-                                        <center><h3>{v.text}</h3></center>
+                                        <h3>{v.text}</h3>
+                                        <br/>
+                                        <CustomBr/><CustomBr/><CustomBr/><CustomBr/><CustomBr/>
+                                        <p>첫번째 텍스트</p>
+                                        <CustomBr/>
+                                        <p>첫번째 텍스트</p>
+                                        <CustomBr/>
+                                        <p>첫번째 텍스트</p>
+                                        <CustomBr/>
+                                        <p>첫번째 텍스트</p>
+                                        <CustomBr/>
+                                        <p>첫번째 텍스트</p>
+                                        <CustomBr/>
                                     </div>
                                 </>
                             ))}
                         </div>
                     </SubMenu>
-                    
                 </MenuWrapperMobile>
             </div>
         </HeaderDiv>

@@ -5,10 +5,11 @@ import Header2 from './Header2.jsx';
 
 const AppLayout = ({ children }) => {
     const menuText = [
-        {"src":"http://naver.com","text":"Home"},
-        {"src":"http://naver.com","text":"Login"},
-        {"src":"http://naver.com","text":"Setting"},
-    ]
+        {"src":"http://naver.com","text":"Home","sub":["a","b","c"]},
+        {"src":"http://naver.com","text":"Login","sub":["a","b","c"]},
+        {"src":"http://naver.com","text":"Setting","sub":["a","b","c"]},
+    ];
+
     return (
         <>
             <Header2 menuText={menuText}/>

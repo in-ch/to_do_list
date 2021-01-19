@@ -37,6 +37,7 @@ const SearchInput = ({}) => {
         timeout.current = setTimeout(() => {
             setClicked(false);
         }, 1500);
+        
     });
     
 
