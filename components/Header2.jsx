@@ -1,11 +1,11 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import SearchInput from './SearchInput.jsx';
 
 const HeaderDiv = styled.div`
-    width:100%;height:50px;border:1px solid #000;
+    width:100%;height:70px;position:fixed;top:0px;left:0px;background:white;
 
     .headerInner {
         width:1000px;height:50px;margin:0 auto;
@@ -14,17 +14,26 @@ const HeaderDiv = styled.div`
         }
     }
 `;
+
 const Logo = styled.div`
-    width:100px;height:50px;border:1px solid #000;float:left;
+    width:100px;height:40px;float:left;margin-top:15px;border-right:1px solid #000;
 `;
 const MenuWrapperDesktop = styled.div`
-    width:200px;height:50px;border:1px solid #000;float:right;
-
+    height:70px;border-bottom:1px solid RGB(200,200,200);position:relative;
+    
+    div{
+        display:inline-block;
+    }
     @media (max-width: 520px) {
         display:none;
     }
     p{
-        display:inline-block;margin-left;20px;margin-right:20px;
+        display:inline-block;margin-left:20px;margin-right:20px;margin-top:20px;font-weight:bold;height:70px;
+    }
+    .loadingHeader{
+        position:fixed;top;0px;left:0px;width:100%;height:2px;background: #4776E6;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #8E54E9, #4776E6);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #8E54E9, #4776E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
 `;
 const MobileLine = styled.div`
@@ -32,9 +41,10 @@ const MobileLine = styled.div`
     width:35px;
     height:25px;
     position:relative;
-    top:6px;
+    top:10px;
+    left:-5px;
     float:right;
-    display:block;
+    display:none;
     margin-right:15px;
     .line {
         background:black;
@@ -45,6 +55,10 @@ const MobileLine = styled.div`
         border-radius:2px;
         position:relative;
     }
+    @media (max-width: 521px) {
+        display:block;
+    }
+    
 `;
 const MenuWrapperMobile = styled.div`
     width:80%;height:100%;position:fixed;top:0px;right:0px;background:white;display:none;z-index:3;overflow:hidden;
@@ -97,11 +111,13 @@ const SubMenu = styled.div`
             width:100%;margin:0;height:70px;color:RGB(150,150,150);vertical-align:middle;display:table-cell;
         }
         .subSubMenu{
-            position:absolute;top:0px;right:0px;background:none;width:65%;height:100%;padding-top:20px;background:white;overflow:hidden;
+            position:absolute;top:0px;right:0px;background:none;height:100%;padding-top:20px;background:white;overflow:hidden;
             h3{
-                color:#4776E6;
+                color:#4776E6;position:relative;left:-7%;
             }
-
+            a{
+                display:block;height:30px;border:0;
+            }
             p{
                 text-align:left;font-size:1.2em;height:30px;display:inline-block;
             }
@@ -114,6 +130,18 @@ const SubMenu = styled.div`
 `;
 const CustomBr = styled.div`
     width:100%;height:1px;background:none;
+`;
+const SubMenuDesktop = styled.div`
+    width:100%;background:white;position:fixed;top:71px;left:0px;overflow:hidden;
+    .imgWrapper{
+        width:300px;height:150px;display:inline-block;border:1px solid #000;float:left;
+    }
+    .SubMenuDesktopWrapper{
+        width:1000px;height:100px;margin:0 auto;display:table;
+    }
+    .p{
+        display:table-cell;
+    }
 `;
 
 const style = {
@@ -130,28 +158,55 @@ const style = {
     aClickOn : {
         background:'white',color:'#4776E6',boxShadow: '-5px 0px 0px 0px white, 5px 0px 0px 0px white',transition: '.3s all',
     },
+    subMenuDefault : {
+    },
+    subMenuOn : {
+        width:'65%',transition: '.5s all',
+    },
+    subMenu : {
+        width: '0%'
+    },
+    subMenuDesktopDefault: {},
+    subMenuDesktopHover: {
+        height:'155px',
+        transition: '.3s all',
+        opacity:1,
+    },
+    subMenuDesktop: {
+        height:'0px',
+        transition: '.3s all',
+        opacity:0,
+    },
+    loading:{
+        width:'0px'
+    },
+    loadingOn:{
+        width: '100%'
+    },
 };
-
-// function removeAllClass(classs){
-//     for(let i =0;i<document.querySelectorAll(`p.${classs}`).length;i++){
-//         document.querySelectorAll(`p.${classs}`)[i].className = '';
-//     }
-// }
 
 const Header = ({menuText}) => {
     const [mobileShow, setMobileShow] = useState(false);
     const [subShow, setSubShow] = useState(0);
-
+    const [subShowHover, setSubShowHover] = useState(-1);
+    const [loadingHeader, setLoadingHeader] = useState(false);
+    const timeoutHeader = useRef();
+    
+    useEffect(()=>{
+        setLoadingHeader(!loadingHeader);
+    },[subShowHover]);
+    
     const mobileShowEvent = useCallback(()=>{
         setMobileShow(!mobileShow); 
     });
     const menuActive = useCallback((i) => {
         setSubShow(i);
-
-        //removeAllClass('menuActiveLink');
-        // e.target.classList.toggle("menuActiveLink");
-        // changeAllClass('noneSubSubMenu');
-        // document.querySelector("div.subSubMenu").className = "noneSubSubMenu";
+    });
+    const onHoverEvent = useCallback((i) => {
+        setSubShowHover(i);
+    });
+    const onLeaveEvent = useCallback(()=>{
+        setSubShowHover(-1);
     });
 
 
@@ -161,12 +216,28 @@ const Header = ({menuText}) => {
                 <Logo><h2>타임라인</h2></Logo>
                 <MenuWrapperDesktop>
                     {menuText.map((v,i) => (
-                        <Link href={v.src} key={i} rel="noopener noreferrer" target="_blank">
-                            <a>
-                                <p>{v.text}</p>
-                            </a>
-                        </Link>
+                        <>
+                            <div onMouseLeave={()=> onLeaveEvent(i)} onMouseEnter={()=> onHoverEvent(i)}>
+                                <Link href={v.src}>
+                                    <a rel="noopener noreferrer" target="_blank">
+                                        <p>{v.text}</p>
+                                    </a>
+                                </Link>
+                                <SubMenuDesktop style={Object.assign({}, style.subMenuDesktopDefault, subShowHover === i ? style.subMenuDesktopHover : style.subMenuDesktop )}>
+                                    <div className="SubMenuDesktopWrapper">
+                                        <div className="imgWrapper">
+                                        </div>
+                                        {v.sub.map((n) => (
+                                            <a rel="noopener noreferrer" target="_blank" href={n.src}>
+                                                <p>{n.text}</p>
+                                            </a>
+                                        ))}
+                                    </div>
+                                </SubMenuDesktop>
+                            </div>
+                        </>
                     ))}
+                    <div class="loadingHeader" style={Object.assign({}, style.default, loadingHeader ? style.loadingOn : style.loading )} />
                 </MenuWrapperDesktop>
                 {mobileShow&& <Cotton />}
                 <MobileLine onClick={mobileShowEvent}  >
@@ -188,7 +259,7 @@ const Header = ({menuText}) => {
                             {menuText.map((v,i) => (
                                 <>
                                     <a onClick={() => menuActive(i)}>
-                                        <p style={Object.assign({}, style.aDefault, subShow === i ? style.aClickOn : style.aClick) } key={i}>{v.text}</p>
+                                        <p style={Object.assign({}, style.aDefault, subShow === i ? style.aClickOn : style.aClick) }>{v.text}</p>
                                     </a>
                                     <div className="subSubMenu">
                                         <h3>{v.text}</h3>

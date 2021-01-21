@@ -7,7 +7,6 @@ const Search = styled.div`
     input[type=text] { 
         outline:0;border:0;width:80%;position:relative;top:-4px;
     }
-    
 `;
 
 const SearchButton = styled.div`
@@ -37,9 +36,7 @@ const SearchInput = ({}) => {
         timeout.current = setTimeout(() => {
             setClicked(false);
         }, 1500);
-        
     });
-    
 
     return (
         <>
