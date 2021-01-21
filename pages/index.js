@@ -1,39 +1,16 @@
 import React from 'react';
 import AppLayout from '../components/AppLayout';
+import SliderInch from '../components/SliderInch.jsx';
 import styled from 'styled-components';
 
 const Home = () => {
     return (
         <>
             <AppLayout>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-            <h2>index.js</h2>
-                
+                <br/><br/><br/>
+                <SliderInch />
             </AppLayout>
         </>
     );
 };
-
 export default Home;
