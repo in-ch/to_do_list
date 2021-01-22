@@ -5,8 +5,7 @@ import styled from 'styled-components';
 import SearchInput from './SearchInput.jsx';
 
 const HeaderDiv = styled.div`
-    width:100%;height:70px;position:fixed;top:0px;left:0px;background:white;
-
+    width:100%;height:70px;position:fixed;top:0px;left:0px;background:white;z-index:2;
     .headerInner {
         width:1000px;height:50px;margin:0 auto;
         @media (max-width: 520px) {
@@ -61,7 +60,7 @@ const MobileLine = styled.div`
     
 `;
 const MenuWrapperMobile = styled.div`
-    width:80%;height:100%;position:fixed;top:0px;right:0px;background:white;display:none;z-index:3;overflow:hidden;
+    width:80%;height:100%;position:fixed;top:0px;right:0px;background:RGBA(255,255,255,0.6);display:none;z-index:3;overflow:hidden;
     @media (max-width: 521px) {
         display:block;
     }
@@ -163,6 +162,7 @@ const style = {
     subMenuOn : {
         width:'65%',transition: '.5s all',
     },
+
     subMenu : {
         width: '0%'
     },
@@ -253,6 +253,7 @@ const Header = ({menuText}) => {
                         <p>인사오지게 박습니다.</p>
                         <SearchInput />
                     </div>
+                    
                     <SubMenu>
                         <div>
                             {menuText.map((v,i) => (
