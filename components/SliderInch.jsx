@@ -1,4 +1,4 @@
-import React, { useEffect, useRef,useState } from 'react';
+import React, { useEffect, useRef,useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -9,6 +9,7 @@ const Container = styled.div`
   position:relative;
   .arrowRight{
       width:5%;position:absolute;top:45%;right:1.5%;opacity:0.6;transition: all 0.2s ease-in-out; 
+
       &:hover{
         opacity:1;
         right:1%;
@@ -16,6 +17,7 @@ const Container = styled.div`
   }
   .arrowLeft{
     width:5%;position:absolute;top:45%;left:1.5%;opacity:0.6;transition: all 0.2s ease-in-out;
+
     &:hover{
         opacity:1;left:1%;
     }
@@ -39,17 +41,22 @@ const SliderContainer = styled.div`
     }
   }
 `;
-
-
-const TOTAL_SLIDES = 2;
-
 const SlideWrapper = styled.div`
     width:100%;height:100%;overflow:hidden;
     div{
         width:100%;height:100%;background-repeat: no-repeat;background-size: cover;background-position: top center;
     }
 `;
+const SliderRemote = styled.div`
+    width:100%;height:10vh;position:absolute;top:90%;
+    @media (max-width: 520px) {
+        width:100%;height:10vh;top:90%;
+    }
+    span{
+        display:inline-block;background:RGBA(0,0,0,0.5);width:20px;height:20px;margin:10px;border-radius:10px;transition: all 0.5s ease-in-out;
+    }
 
+`;
 const style = {
     default:{
     },
@@ -64,9 +71,15 @@ const style = {
     },
     slideTextOn:{
         top: '25%',
-    }
+    },
+    remoteOn:{
+        width: '40px',background:'#4776E6',
+    },
+    remote:{
+    },
 };
 
+const TOTAL_SLIDES = 2;
 
 const SliderInch = ({slideData}) => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -85,6 +98,11 @@ const SliderInch = ({slideData}) => {
             setCurrentSlide(currentSlide - 1);
         }
     };
+
+    const moveSlide = useCallback((i) => {
+        setCurrentSlide(i);
+        console.log(i);
+    });
 
 
     useEffect(() => {
@@ -108,6 +126,15 @@ const SliderInch = ({slideData}) => {
                     </>
                 ))}
           </SliderContainer>
+          <SliderRemote>
+              <center>
+                    {slideData.map((v,i)=>(
+                        <>
+                            <span onClick={() => moveSlide(i)} style={Object.assign({}, style.default, currentSlide === i ? style.remoteOn : style.remote )}/>
+                        </>
+                    ))}
+              </center>
+          </SliderRemote>
           <img onClick={nextSlide} className="arrowRight" src="/icons/rightIcon.svg"/>
           <img onClick={prevSlide} className="arrowLeft" src="/icons/leftIcon.svg"/>
         </Container>
