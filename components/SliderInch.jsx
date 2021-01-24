@@ -1,8 +1,6 @@
 import React, { useEffect, useRef,useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Slide from './Slide';
-
 
 const Container = styled.div`
   width: 100%;
@@ -19,7 +17,13 @@ const SliderContainer = styled.div`
       width:100%;height:98vh;
   }
   div{
-      width:100%;height:100%;border:1px solid #000;
+    transition: all 2s ease-in-out;position:relative;
+    table{
+        width:50%;height:50vh;position:fixed;background:RGBA(0,0,0,0.2);left:25%;overflow:hidden;transition: all 1s ease-in-out;
+        @media (max-width: 520px) {
+            width:70%;height:50vh;left:15%;
+        }
+    }
   }
 `;
 const Button = styled.button`
@@ -38,7 +42,32 @@ const Button = styled.button`
 
 const TOTAL_SLIDES = 2;
 
-const SliderInch = ({}) => {
+const SlideWrapper = styled.div`
+    width:100%;height:100%;overflow:hidden;
+    div{
+        width:100%;height:100%;background-repeat: no-repeat;background-size: cover;background-position: top center;
+    }
+`;
+
+const style = {
+    default:{
+    },
+    slideImg:{
+        transform : 'scale(1)',
+    },
+    slideImgOn:{
+        transform : 'scale(1.2)',
+    },
+    slideText:{
+        top: '100%',
+    },
+    slideTextOn:{
+        top: '25%',
+    }
+};
+
+
+const SliderInch = ({slideData}) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const slideRef = useRef(null);
     const nextSlide = () => {
@@ -55,28 +84,28 @@ const SliderInch = ({}) => {
             setCurrentSlide(currentSlide - 1);
         }
     };
+
+
     useEffect(() => {
         slideRef.current.style.transition = "all 0.5s ease-in-out";
-        slideRef.current.style.transform = `translateX(-${currentSlide*33.33333333333}%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
+        const NUM = Number(100) / (Number(TOTAL_SLIDES)+Number(1));
+        slideRef.current.style.transform = `translateX(-${currentSlide*NUM}%)`;
     }, [currentSlide]);
 
     return (
         <Container>
-          {currentSlide}
           <SliderContainer ref={slideRef}>
-            {/* <img src="http://www.upskin.co.kr/images/main/special/1.jpg" />
-            <img src="http://www.upskin.co.kr/images/main/special/2.jpg" />
-            <img src="http://www.upskin.co.kr/images/main/special/3.jpg" /> */}
-            <div>
-                <img src="http://www.upskin.co.kr/images/main/special/1.jpg" />
-            </div>
-            <div>
-                <img src="http://www.upskin.co.kr/images/main/special/2.jpg" />
-            </div>
-            <div>
-                <img src="http://www.upskin.co.kr/images/main/special/3.jpg" />
-            </div>
-            
+                {slideData.map((v,i)=>(
+                    <>
+                        <SlideWrapper key={i} style={Object.assign({}, style.default, currentSlide === i ? style.slideImgOn : style.slideImg )}>
+                            <div style={{backgroundImage: v.src}}>
+                                <table style={Object.assign({}, style.default, currentSlide === i ? style.slideTextOn : style.slideText )}>
+
+                                </table>
+                            </div>
+                        </SlideWrapper>
+                    </>
+                ))}
           </SliderContainer>
           <Button onClick={prevSlide}>Previous Slide</Button>
           <Button onClick={nextSlide}>Next Slide</Button>
@@ -87,9 +116,9 @@ const SliderInch = ({}) => {
 }
 
 
-// SliderInch.propTypes = {
-//     slideData: PropTypes.array.isRequired,
-// };
+SliderInch.propTypes = {
+    slideData: PropTypes.array.isRequired,
+};
 
 
 export default SliderInch;

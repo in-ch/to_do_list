@@ -236,6 +236,7 @@ const Header = ({menuText}) => {
                             </div>
                         </>
                     ))}
+
                     <div class="loadingHeader" style={Object.assign({}, style.default, loadingHeader ? style.loadingOn : style.loading )} />
                 </MenuWrapperDesktop>
                 {mobileShow&& <Cotton />}
@@ -253,6 +254,7 @@ const Header = ({menuText}) => {
                         <p>인사오지게 박습니다.</p>
                         <SearchInput />
                     </div>
+                    
                     
                     <SubMenu>
                         <div>
