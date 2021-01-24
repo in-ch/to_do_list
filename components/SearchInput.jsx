@@ -30,6 +30,7 @@ const SearchInput = ({}) => {
     const searchChange = useCallback((e) => {
         setSearchValue(e.target.value);
     });
+    
     const searchClick = useCallback(() => {
         setClicked(!clicked);
         setSearchValue('');

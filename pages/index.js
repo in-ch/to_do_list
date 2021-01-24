@@ -1,6 +1,7 @@
 import React from 'react';
 import AppLayout from '../components/AppLayout';
 import SliderInch from '../components/SliderInch.jsx';
+import Gallery from '../components/Gallery.jsx';
 
 const Home = () => {
     const slideData = [
@@ -12,13 +13,11 @@ const Home = () => {
         <>
             <AppLayout>
                 <SliderInch slideData={slideData}/>
-                <h2>content</h2>
-                <h2>content</h2>
-                <h2>content</h2>
-                <h2>content</h2>
-                <h2>content</h2>
+                <Gallery />
+                <br/><br/><br/>
+                <br/><br/><br/>
+                <br/><br/><br/>
             </AppLayout>
-            
         </>
     );
 };

@@ -65,6 +65,7 @@ const MenuWrapperMobile = styled.div`
     @media (max-width: 521px) {
         display:block;
     }
+    
     p{
         display:block;margin:20px;
     }
@@ -210,6 +211,7 @@ const Header = ({menuText}) => {
         setSubShowHover(-1);
     });
 
+    
     return (
         <HeaderDiv>
             <div className="headerInner">

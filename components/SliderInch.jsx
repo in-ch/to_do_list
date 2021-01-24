@@ -47,6 +47,7 @@ const SlideWrapper = styled.div`
         width:100%;height:100%;background-repeat: no-repeat;background-size: cover;background-position: top center;
     }
 `;
+
 const SliderRemote = styled.div`
     width:100%;height:10vh;position:absolute;top:90%;
     @media (max-width: 520px) {
