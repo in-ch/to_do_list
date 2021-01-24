@@ -12,6 +12,11 @@ const Home = () => {
         <>
             <AppLayout>
                 <SliderInch slideData={slideData}/>
+                <h2>content</h2>
+                <h2>content</h2>
+                <h2>content</h2>
+                <h2>content</h2>
+                <h2>content</h2>
             </AppLayout>
             
         </>

@@ -7,6 +7,19 @@ const Container = styled.div`
   height:95%;
   overflow: hidden; // 선을 넘어간 이미지들은 보이지 않도록 처리합니다.
   position:relative;
+  .arrowRight{
+      width:5%;position:absolute;top:45%;right:1.5%;opacity:0.6;transition: all 0.2s ease-in-out; 
+      &:hover{
+        opacity:1;
+        right:1%;
+      }
+  }
+  .arrowLeft{
+    width:5%;position:absolute;top:45%;left:1.5%;opacity:0.6;transition: all 0.2s ease-in-out;
+    &:hover{
+        opacity:1;left:1%;
+    }
+  }
 `;
 
 const SliderContainer = styled.div`
@@ -26,19 +39,7 @@ const SliderContainer = styled.div`
     }
   }
 `;
-const Button = styled.button`
-  all: unset;
-  border: 1px solid coral;
-  padding: 0.5em 2em;
-  color: coral;
-  border-radius: 10px;
-  &:hover {
-    transition: all 0.3s ease-in-out;
-    background-color: coral;
-    color: #fff;
-  }
-  position:relative;top:-150px;
-`;
+
 
 const TOTAL_SLIDES = 2;
 
@@ -107,8 +108,8 @@ const SliderInch = ({slideData}) => {
                     </>
                 ))}
           </SliderContainer>
-          <Button onClick={prevSlide}>Previous Slide</Button>
-          <Button onClick={nextSlide}>Next Slide</Button>
+          <img onClick={nextSlide} className="arrowRight" src="/icons/rightIcon.svg"/>
+          <img onClick={prevSlide} className="arrowLeft" src="/icons/leftIcon.svg"/>
         </Container>
     );
 
