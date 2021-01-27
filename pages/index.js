@@ -9,11 +9,22 @@ const Home = () => {
         {"src":"url(http://www.upskin.co.kr/images/main/special/2.jpg)","text":"당신과 함께 합니까?"},
         {"src":"url(http://www.upskin.co.kr/images/main/special/3.jpg)","text":"당신과 함께 할까요?"},
     ];
+    const slideData2 = [
+        {"src":"url(http://www.upskin.co.kr/files/mainhotpick/attach1/1_202012022145401080.jpg)","text":"0"},
+        {"src":"url(http://www.upskin.co.kr/files/mainhotpick/attach1/1_202011301422859400.jpg)","text":"1"},
+        {"src":"url(http://www.upskin.co.kr/files/mainhotpick/attach1/1_202012022145401080.jpg)","text":"2"},
+        {"src":"url(http://www.upskin.co.kr/files/mainhotpick/attach1/1_202011301422859400.jpg)","text":"3"},
+        {"src":"url(http://www.upskin.co.kr/files/mainhotpick/attach1/1_202012022145401080.jpg)","text":"4"},
+        {"src":"url(http://www.upskin.co.kr/files/mainhotpick/attach1/1_202012022145401000.jpg)","text":"5"},
+        {"src":"url(http://www.upskin.co.kr/files/mainhotpick/attach1/1_202012022145401080.jpg)","text":"6"},
+        {"src":"url(http://www.upskin.co.kr/files/mainhotpick/attach1/1_202012022145401000.jpg)","text":"7"},
+        {"src":"url(http://www.upskin.co.kr/files/mainhotpick/attach1/1_202012022145401080.jpg)","text":"8"},
+    ];
     return (
         <>
             <AppLayout>
                 <SliderInch slideData={slideData}/>
-                <Gallery />
+                <Gallery slideData={slideData2}/>
                 <br/><br/><br/>
                 <br/><br/><br/>
                 <br/><br/><br/>
