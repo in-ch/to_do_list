@@ -28,8 +28,7 @@ const GalleryBox = styled.div`
 const Gallery = ({slideData}) =>  {
     const [current, setCurrent] = useState(0);
     const SlideRef = useRef();  
-    const [slideShow, setSlideShow] = useState(3.02);
-    
+    const [slideShow, setSlideShow] = useState();
     const size = useWindowSize();
     
     function useWindowSize() {
@@ -37,14 +36,14 @@ const Gallery = ({slideData}) =>  {
       function getSize() {
         let width = isClient ? window.innerWidth : undefined;
         let data;
+
         width > 550 ? data = 3.02 : data = 1;
+        width > 550 ? setSlideShow(3.02) : setSlideShow(1);
 
         return data;
       }
       
-      
       const [windowSize, setWindowSize] = useState(getSize);
-
       
       useEffect(() => {
         if (!isClient) {
