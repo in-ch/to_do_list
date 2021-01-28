@@ -38,7 +38,7 @@ const Gallery = ({slideData}) =>  {
         let data;
 
         width > 550 ? data = 3.02 : data = 1;
-        width > 550 ? setSlideShow(3.02) : setSlideShow(1);
+        width > 550 ? setSlideShow(3.02) : setSlideShow(1);  // 로딩 시 이벤트
 
         return data;
       }

@@ -2,6 +2,7 @@ import React from 'react';
 import AppLayout from '../components/AppLayout';
 import SliderInch from '../components/SliderInch.jsx';
 import Gallery from '../components/Gallery.jsx';
+import BestChoice from '../components/BestChoice.jsx';
 
 const Home = () => {
     const slideData = [
@@ -25,6 +26,7 @@ const Home = () => {
             <AppLayout>
                 <SliderInch slideData={slideData}/>
                 <Gallery slideData={slideData2}/>
+                <BestChoice />
                 <br/><br/><br/>
                 <br/><br/><br/>
                 <br/><br/><br/>
