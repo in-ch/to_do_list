@@ -1,4 +1,4 @@
-import React, { Component, useCallback, useEffect, useState } from "react";
+import React, { Component, useCallback, useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import styled from 'styled-components';
 
@@ -24,53 +24,59 @@ const GalleryBox = styled.div`
     }
 `;
 
+
 const Gallery = ({slideData}) =>  {
     const [current, setCurrent] = useState(0);
-    const galleryChange = useCallback((current,next)=>{
-        //setCurrent(current);
-    });
+    const SlideRef = useRef();  
+    const [slideShow, setSlideShow] = useState(3.02);
     
-    if(window.innerWidth<600){
-      const [slideShow, setSlideShow] = useState(1);
-    } else {
-      const [windowSize, setSlideShow] = useState(3.02);
+    const size = useWindowSize();
+    
+    function useWindowSize() {
+      const isClient = typeof window === 'object';
+      function getSize() {
+        let width = isClient ? window.innerWidth : undefined;
+        let data;
+        width > 550 ? data = 3.02 : data = 1;
+
+        return data;
+      }
+      
+      
+      const [windowSize, setWindowSize] = useState(getSize);
+
+      
+      useEffect(() => {
+        if (!isClient) {
+          return false;
+        }
+  
+        function handleResize() {
+          setSlideShow(getSize());
+        }
+  
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+      }, []); 
+  
+      return windowSize;
     }
-    
-    useEffect(()=> {
-        let resizeTimer
-        let windowSizer = () => { 
-            clearTimeout(resizeTimer)
-            resizeTimer = setTimeout(()=>{
-                slideShow
-            },300)
-        }
-        window.addEventListener('resize', windowSizer)
- 
-        return () => {
-            window.removeEventListener('resize', windowSizer)
-            
-        }
-    },[slideShow])
 
 
     const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: slideShow,  // 이거 변수로 해서 바꿔야 될 듯 
-        slidesToScroll: 3.02,
-        arrows: false,
-        centerMode: true,
-        afterChange: (current) => setCurrent(current),
-        initialSlide: current,
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: slideShow,  // 이거 변수로 해서 바꿔야 될 듯 
+      slidesToScroll: 3.02,
+      arrows: false,
+      centerMode: true,
+      afterChange: (current) => setCurrent(current),
+      initialSlide: current,
     };
 
-    useEffect(()=>{
-      console.log(window.innerWidth );
-    },[window.innerWidth]);
-
     return (
-      <SlideWrapper>
+      <SlideWrapper ref={SlideRef}>
         <br/><img className="img" src="/imgs/cleanup.png" /><br/><br/>
         <Slider {...settings}>
           {slideData.map((v,i)=>(
@@ -80,25 +86,6 @@ const Gallery = ({slideData}) =>  {
               </div>
             </GalleryBox>
           ))}
-          {/* <div>
-            <h3>0</h3>
-          </div>
-          <div>
-            <h3>0</h3>
-          </div>
-          <div>
-            <h3>0</h3>
-          </div>
-          <div>
-            <h3>0</h3>
-          </div>
-          <div>
-            <h3>0</h3>
-          </div>
-          <div>
-            <h3>0</h3>
-          </div> */}
-
         </Slider>
       </SlideWrapper>
     );

@@ -24,6 +24,7 @@ const Container = styled.div`
   }
 `;
 
+
 const SliderContainer = styled.div`
   width: 300%;
   height:100vh;

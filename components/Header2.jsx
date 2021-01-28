@@ -187,12 +187,13 @@ const style = {
     },
 };
 
+
 const Header = ({menuText}) => {
     const [mobileShow, setMobileShow] = useState(false);
     const [subShow, setSubShow] = useState(0);
     const [subShowHover, setSubShowHover] = useState(-1);
     const [loadingHeader, setLoadingHeader] = useState(false);
-    const timeoutHeader = useRef();
+    // const timeoutHeader = useRef();
     
     useEffect(()=>{
         setLoadingHeader(!loadingHeader);
