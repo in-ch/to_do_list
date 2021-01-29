@@ -101,6 +101,7 @@ const SliderInch = ({slideData}) => {
             setCurrentSlide(currentSlide - 1);
         }
     };
+    
 
     const moveSlide = useCallback((i) => {
         setCurrentSlide(i);

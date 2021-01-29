@@ -16,6 +16,7 @@ const SlideWrapper = styled.div`
     .slick-dots{
       position:relative;top:20px;
     }
+    
     .img{
       display:block;width:230px;margin:0 auto;margin-top:50px;margin-bottom:10px;
     }

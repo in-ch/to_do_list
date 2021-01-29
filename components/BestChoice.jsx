@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const BestChoiceBox = styled.div`
-    width:20%;padding-bottom:28%;display:inline-block;margin: 0 0 15px 15px;position:relative;
+    width:20%;padding-bottom:32%;display:inline-block;margin: 0 0 15px 15px;position:relative;
     div:nth-child(1){
         width:100%;height:75%;position:Absolute;top:0px;left:0px;overflow:hidden;
         div{
@@ -16,6 +16,7 @@ const BestChoiceBox = styled.div`
         p{
             margin-top:5px;
         }
+
         p:nth-child(1){
             font-size:1.4em;font-weight:bold;
             @media (max-width: 521px) {
@@ -47,7 +48,7 @@ const BestChoiceBox = styled.div`
 
 
 const BestChoiceBoxSecond = styled.div`
-    width:20%;padding-bottom:28%;display:inline-block;margin: 0 0 15px 15px;position:relative;
+    width:20%;padding-bottom:32%;display:inline-block;margin: 0 0 15px 15px;position:relative;
     
     div:nth-child(2){
         width:100%;height:75%;position:Absolute;bottom:0px;left:0px;overflow:hidden;
