@@ -25,6 +25,7 @@ const Container = styled.div`
 `;
 
 
+
 const SliderContainer = styled.div`
   width: 300%;
   height:100vh;
@@ -141,14 +142,14 @@ const SliderInch = ({slideData}) => {
           <img onClick={prevSlide} className="arrowLeft" src="/icons/leftIcon.svg"/>
         </Container>
     );
-
-        
 }
 
 
 SliderInch.propTypes = {
     slideData: PropTypes.array.isRequired,
 };
+
+
 
 
 export default SliderInch;

@@ -5,7 +5,10 @@ import styled from 'styled-components';
 const SlideWrapper = styled.div`
     margin-top:30px;margin-bottom:30px;
     div{
-        height:500px;
+        height:750px;
+        @media (max-width: 521px) {
+          height:500px;
+        }
     }
     .slick-slide div{
       outline: none; // 슬라이드 클릭시 파란선을 제거하기 위해서 작성
@@ -23,7 +26,6 @@ const GalleryBox = styled.div`
       background-repeat: no-repeat;background-size: cover;background-position: top center;box-shadow: 5px 2px 8px RGBA(0,0,0,0.2);
     }
 `;
-
 
 const Gallery = ({slideData}) =>  {
     const [current, setCurrent] = useState(0);

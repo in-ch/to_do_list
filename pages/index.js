@@ -21,12 +21,19 @@ const Home = () => {
         {"src":"url(http://www.upskin.co.kr/files/mainhotpick/attach1/1_202012022145401000.jpg)","text":"7"},
         {"src":"url(http://www.upskin.co.kr/files/mainhotpick/attach1/1_202012022145401080.jpg)","text":"8"},
     ];
+    const galleryData = [
+        {"src":"url(http://www.upskin.co.kr/images/main/best/1.jpg)","heading":"여드름","text":"여드름치료의 역사를 만듭니다.","text2":"여드름/자국/흉터 복합치료 연구개발","type":""},
+        {"src":"url(http://www.upskin.co.kr/images/main/best/2.jpg)","heading":"색소","text":"어려운 색소치료도 가능합니다. ","text2":"환자 증상 별 색소치료레이저","type":"upper"},
+        {"src":"url(http://www.upskin.co.kr/images/main/best/4.jpg)","heading":"안티에이징","text":"주름과 탄력을 동시에 개선합니다.","text2":"20~60대 연령대별 맞춤 시술"},
+        {"src":"url(http://www.upskin.co.kr/images/main/best/3.jpg)","heading":"문신제거","text":"흑백/컬러/복합문신도 깨끗하게!","text2":"시술 후 색소침착 및 통증 최소화","type":"upper"},
+    ];
+
     return (
         <>
             <AppLayout>
                 <SliderInch slideData={slideData}/>
                 <Gallery slideData={slideData2}/>
-                <BestChoice />
+                <BestChoice galleryData={galleryData} />
                 <br/><br/><br/>
                 <br/><br/><br/>
                 <br/><br/><br/>
