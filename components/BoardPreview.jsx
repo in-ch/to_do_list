@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 const Board = styled.div`
     font-family: 'Nanum Gothic', sans-serif;
-    width: 30%;height:370px;border-right:1px solid RGB(200,200,200);display:inline-block;margin: 0 auto;margin-top:150px;
+    width: 30%;height:370px;border-right:1px solid RGB(200,200,200);display:inline-block;margin: 0 auto;margin-top:30px;
+
     div{
         width:80%;height:95%;margin-top:2.5%;text-align:left;overflow:hidden;
         .heading{
@@ -42,12 +43,19 @@ const Board = styled.div`
 const plusBox = styled.div`
     width:20px;height:20px;border:1px solid #000;
 `;
+const Img = styled.img`
+    margin-top:150px;display:block;width:250px;
+    @media (max-width: 521px) {
+        margin-top:50px;
+    }
+`;
 
 const BoardPreview = () => {
 
     return (
         <>
             <center>
+                <Img className="community" src="/imgs/community.png" />
                 <Board>
                     <div>
                         <p className="heading">공지사항</p><br/>
