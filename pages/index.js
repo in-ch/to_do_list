@@ -3,6 +3,7 @@ import AppLayout from '../components/AppLayout';
 import SliderInch from '../components/SliderInch.jsx';
 import Gallery from '../components/Gallery.jsx';
 import BestChoice from '../components/BestChoice.jsx';
+import BoardPreview from '../components/BoardPreview.jsx';
 
 const Home = () => {
     const slideData = [
@@ -34,9 +35,7 @@ const Home = () => {
                 <SliderInch slideData={slideData}/>
                 <Gallery slideData={slideData2}/>
                 <BestChoice galleryData={galleryData} />
-                <br/><br/><br/>
-                <br/><br/><br/>
-                <br/><br/><br/>
+                <BoardPreview />
             </AppLayout>
         </>
     );
