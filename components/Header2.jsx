@@ -11,7 +11,6 @@ const HeaderDiv = styled.div`
         @media (max-width: 520px) {
             width:100%;overflow:hidden; 
         }
-        
     }
 `;
 

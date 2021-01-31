@@ -9,7 +9,6 @@ const Container = styled.div`
   position:relative;
   .arrowRight{
       width:5%;position:absolute;top:45%;right:1.5%;opacity:0.6;transition: all 0.2s ease-in-out; 
-
       &:hover{
         opacity:1;
         right:1%;

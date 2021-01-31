@@ -1,5 +1,6 @@
 import React, { Component, useCallback, useEffect, useRef, useState } from "react";
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Board = styled.div`
     font-family: 'Nanum Gothic', sans-serif;
@@ -119,5 +120,9 @@ const BoardPreview = ({boardPreview, newPreview}) => {
         </>
     )
 };
-
 export default BoardPreview;
+
+BoardPreview.propTypes = {
+    boardPreview: PropTypes.array.isRequired, 
+    newPreview: PropTypes.array.isRequired
+};
