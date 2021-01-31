@@ -4,6 +4,7 @@ import SliderInch from '../components/SliderInch.jsx';
 import Gallery from '../components/Gallery.jsx';
 import BestChoice from '../components/BestChoice.jsx';
 import BoardPreview from '../components/BoardPreview.jsx';
+import MainPageOnlineConsulting from '../components/MainPageOnlineConsulting';
 
 const Home = () => {
     const slideData = [
@@ -47,6 +48,7 @@ const Home = () => {
                 <Gallery slideData={slideData2}/>
                 <BestChoice galleryData={galleryData} />
                 <BoardPreview boardPreview={boardPreview} newPreview={newPreview}/>
+                <MainPageOnlineConsulting />
             </AppLayout>
         </>
     );

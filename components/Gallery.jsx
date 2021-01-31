@@ -76,7 +76,6 @@ const Gallery = ({slideData}) =>  {
       afterChange: (current) => setCurrent(current),
       initialSlide: current,
     };
-
     return (
       <SlideWrapper ref={SlideRef}>
         <br/><img className="img" src="/imgs/cleanup.png" /><br/><br/>
