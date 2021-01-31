@@ -93,13 +93,6 @@ const MainPageOnlineConsulting = () =>{
                 </Wrapper>
             </center>
             <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
         </>
     )
 };

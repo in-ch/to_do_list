@@ -5,6 +5,7 @@ import Gallery from '../components/Gallery.jsx';
 import BestChoice from '../components/BestChoice.jsx';
 import BoardPreview from '../components/BoardPreview.jsx';
 import MainPageOnlineConsulting from '../components/MainPageOnlineConsulting';
+import Footer from '../components/Footer.jsx';
 
 const Home = () => {
     const slideData = [
@@ -49,6 +50,7 @@ const Home = () => {
                 <BestChoice galleryData={galleryData} />
                 <BoardPreview boardPreview={boardPreview} newPreview={newPreview}/>
                 <MainPageOnlineConsulting />
+                <Footer />
             </AppLayout>
         </>
     );
