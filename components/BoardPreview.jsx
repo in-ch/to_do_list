@@ -6,13 +6,15 @@ const Board = styled.div`
     width: 30%;height:370px;border-right:1px solid RGB(200,200,200);display:inline-block;margin: 0 auto;margin-top:30px;
 
     div{
-        width:80%;height:95%;margin-top:2.5%;text-align:left;overflow:hidden;
+        width:80%;height:100%;margin-top:2.5%;text-align:left;overflow:hidden;
         .heading{
             font-size:2em;font-weight:bold;
             &:hover{
                 color:red;transition: all 0.2s ease-in-out;
             }
         }
+
+        
         .notice_p{
             font-size:1.1em;margin-top:10px;width:100%;height:22px;display:flex;color:RGB(150,150,150);
             &:hover{
@@ -50,7 +52,23 @@ const Img = styled.img`
     }
 `;
 
-const BoardPreview = () => {
+export const BOARD_TYPE = {
+    0: '[전체보기]',
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+};
+
+export const NEW_TYPE = {
+    0: '[전체지점]',
+    1: '[명동점]',
+    2: '[인천청라점]',
+    3: '[청담점]',
+    4: '[송도점]',
+};
+
+const BoardPreview = ({boardPreview, newPreview}) => {
 
     return (
         <>
@@ -60,52 +78,34 @@ const BoardPreview = () => {
                     <div>
                         <p className="heading">공지사항</p><br/>
                         <img src="/imgs/notice_img.jpg" />
-                        <p className="notice_p">
-                            <p>[공지사항]</p>
-                            <p>[안내] 2월 설 연휴 진료 일정</p>
-                            <p>2021-01-29</p>
-                        </p>
-                        <p className="notice_p">
-                            <p>[공지사항]</p>
-                            <p>[안내] 2월 설 연휴 진료 일정</p>
-                            <p>2021-01-29</p>
-                        </p>
-                        <p className="notice_p">
-                            <p>[공지사항]</p>
-                            <p>[안내] 2월 설 연휴 진료 일정</p>
-                            <p>2021-01-29</p>
-                        </p>
-                        <p className="notice_p">
-                            <p>[공지사항]</p>
-                            <p>[안내] 2월 설 연휴 진료 일정</p>
-                            <p>2021-01-29</p>
-                        </p>
+                        {boardPreview.map((v,i)=>{
+                            return(
+                                <>
+                                    <p className="notice_p">
+                                        <p>{BOARD_TYPE[v.type]}</p>
+                                        <p>{v.text}</p>
+                                        <p>{v.data}</p>
+                                    </p>
+                                </>
+                            );
+                        })}
                     </div>
                 </Board>
                 <Board>
                     <div>
                         <p className="heading">뉴스&미디어</p><br/>
                         <img src="/imgs/media_img.jpg" />
-                        <p className="notice_p">
-                            <p>[명동점]</p>
-                            <p>[MBN 특집다큐H] 건강</p>
-                            <p>2021-01-29</p>
-                        </p>
-                        <p className="notice_p">
-                            <p>[전체지점]</p>
-                            <p>엑셀v레이저에서 제네시스 모두</p>
-                            <p>2021-01-29</p>
-                        </p>
-                        <p className="notice_p">
-                            <p>[명동점]</p>
-                            <p>[안내] 2월 설 연휴 진료 일정</p>
-                            <p>2021-01-29</p>
-                        </p>
-                        <p className="notice_p">
-                            <p>[인천청라점]</p>
-                            <p>엑셀v레이저 기능 강화된 엑스레이</p>
-                            <p>2021-01-29</p>
-                        </p>
+                        {newPreview.map((v,i)=>{
+                            return(
+                                <>
+                                    <p className="notice_p">
+                                        <p>{NEW_TYPE[v.type]}</p>
+                                        <p>{v.text}</p>
+                                        <p>{v.data}</p>
+                                    </p>
+                                </>
+                            );
+                        })}
                     </div>
                 </Board>
                 <Board>
