@@ -85,6 +85,9 @@ const MenuWrapperMobile = styled.div`
         height:24%;
         margin: 0;border:0;
         z-index:2;
+        @media (max-width: 281px) {
+            height:28%;
+        }
     }
     p{
         text-align:center;font-size:1.2em;color:white;line-height:5px;
@@ -109,9 +112,18 @@ const SubMenu = styled.div`
         }
         p{
             width:100%;margin:0;height:70px;color:RGB(150,150,150);vertical-align:middle;display:table-cell;
+            @media (max-width: 281px) {
+                font-size:0.8em;
+            }
         }
         .subSubMenu{
-            position:absolute;top:0px;right:100px;background:none;height:100%;padding-top:20px;background:white;overflow:hidden;
+            position:absolute;top:0px;right:80px;background:none;height:100%;padding-top:20px;background:white;overflow:hidden;
+            @media (max-width: 281px) {
+                right:30px;
+                h3{
+                    font-size:1em;
+                }
+            }
             h3{
                 color:#4776E6;position:relative;left:-7%;
             }
@@ -120,6 +132,9 @@ const SubMenu = styled.div`
             }
             p{
                 text-align:left;font-size:1.2em;height:30px;display:inline-block;
+                @media (max-width: 281px) {
+                    font-size:1em;
+                }
             }
             
             img{

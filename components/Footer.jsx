@@ -66,6 +66,7 @@ const Footer = () => {
                     <div className="copyRight">
                         <p>@CopyRight 2020 by tigredosud</p>
                         <p>ALL RIGHT RESERVED</p>
+                        <br/>
                     </div>
                 </Wrapper>
             </footer>
