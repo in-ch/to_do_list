@@ -10,6 +10,7 @@ const Wrapper = styled.div`
             @media (max-width: 281px) {
                 width:35px;margin-top:30px;
             }
+            
         }
     }
     .footerADiv{

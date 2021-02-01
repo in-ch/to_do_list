@@ -1,7 +1,8 @@
 import React from 'react';
 import AppLayout from '../components/AppLayout';
 import styled from 'styled-components';
-import MenuLink from '../components/MenuLink';
+import MenuLink from '../components/MenuLink.jsx';
+import Table from '../components/Table.jsx';
 
 const IMG_WRAPPER = styled.div`
     width:100%;height:300px;background-image:url("/imgs/typing.jpg");margin-top:70px;
@@ -41,6 +42,8 @@ const Notice = () => {
                     <h1>의료 상담</h1>
                     <UNDER_LINE />
                     <SUB_P>타임라인과 함께한 시술 이야기를 들어보세요.</SUB_P>
+                    <br/><br/><br/>
+                    <Table />
                 </center>
             </AppLayout>
         </>
