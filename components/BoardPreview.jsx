@@ -18,11 +18,15 @@ const Board = styled.div`
         
         .notice_p{
             font-size:1.1em;margin-top:10px;width:100%;height:22px;display:flex;color:RGB(150,150,150);
+
             &:hover{
                 text-decoration:underline;
             }
             p{
                 display:inline-block;
+                @media (max-width: 281px) {
+                    font-size:0.7em;
+                }
             }
             p:nth-child(1){
                 flex:3;color:skyblue;

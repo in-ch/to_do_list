@@ -22,6 +22,9 @@ const BestChoiceBox = styled.div`
             @media (max-width: 521px) {
                 font-size:1.2em;
             }
+            @media (max-width: 281px) {
+                font-size:1em;
+            }
         }
         p:nth-child(2){
             font-size:1em;color:RGB(100,100,100);
@@ -32,6 +35,9 @@ const BestChoiceBox = styled.div`
     }
     @media (max-width: 521px) {
         width:45%;margin: 0 0 25px;padding-bottom:75%;
+    }
+    @media (max-width: 281px) {
+        width:45%;margin: 0 0 25px;padding-bottom:98%;margin-bottom:20px;
     }
     &:hover{
         div:nth-child(1){
@@ -49,7 +55,6 @@ const BestChoiceBox = styled.div`
 
 const BestChoiceBoxSecond = styled.div`
     width:20%;padding-bottom:32%;display:inline-block;margin: 0 0 15px 15px;position:relative;
-    
     div:nth-child(2){
         width:100%;height:75%;position:Absolute;bottom:0px;left:0px;overflow:hidden;
         div{
@@ -70,6 +75,9 @@ const BestChoiceBoxSecond = styled.div`
             @media (max-width: 521px) {
                 font-size:1.2em;
             }
+            @media (max-width: 281px) {
+                font-size:1em;
+            }
         }
         p:nth-child(2){
             font-size:1em;color:RGB(100,100,100);
@@ -81,6 +89,10 @@ const BestChoiceBoxSecond = styled.div`
     @media (max-width: 521px) {
         width:45%;margin: 0 0 25px;padding-bottom:75%;margin-bottom:20px;
     }
+    @media (max-width: 281px) {
+        width:49%;margin: 0 0 25px;padding-bottom:98%;margin-bottom:20px;
+    }
+
     &:hover{
         div:nth-child(2){
             div{
