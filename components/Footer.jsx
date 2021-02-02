@@ -6,7 +6,7 @@ const Wrapper = styled.div`
     .sns{
         background:RGB(100,100,100);width:100%;height:30%;
         img{
-            width:50px;margin-top:20px;margin-left:10px;margin-right:10px;
+            width:50px;margin-top:25px;margin-left:10px;margin-right:10px;
             @media (max-width: 281px) {
                 width:35px;margin-top:30px;
             }
