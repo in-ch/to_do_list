@@ -3,6 +3,7 @@ import AppLayout from '../components/AppLayout';
 import styled from 'styled-components';
 import MenuLink from '../components/MenuLink.jsx';
 import Table from '../components/Table.jsx';
+import Editor from '../components/Editor.jsx';
 
 const IMG_WRAPPER = styled.div`
     width:100%;height:300px;background-image:url("/imgs/typing.jpg");margin-top:70px;
@@ -45,6 +46,7 @@ const Notice = () => {
                     <br/><br/><br/>
                     <Table />
                 </center>
+                <Editor />
             </AppLayout>
         </>
     )

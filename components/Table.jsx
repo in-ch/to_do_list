@@ -1,16 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components'; 
 
 const Hr = styled.hr`
     width:1090px;
     @media (max-width: 521px) {
-        width:100%;
+        width:95%;margin-left:2.5%;
     }
 `;
 const TableComponent = styled.table`
     width:1100px;font-size:0.8em;
     @media (max-width: 521px) {
-        width:100%;
+        width:96%;margin-left:2%;
         font-size:0.6em;
     }
     text-align:center;
