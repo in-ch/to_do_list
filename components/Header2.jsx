@@ -77,6 +77,7 @@ const MenuWrapperMobile = styled.div`
     input[type=button]{
         background:none;border:0.2px solid white;color:white;margin:11px;font-size:0.4em;width:60px;height:25px;border-radius:10px;position:relative;top:-2px;
     }
+    
     .gradient{
         background: #4776E6;  /* fallback for old browsers */
         background: -webkit-linear-gradient(to right, #8E54E9, #4776E6);  /* Chrome 10-25, Safari 5.1-6 */

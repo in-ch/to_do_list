@@ -13,6 +13,7 @@ const TableComponent = styled.table`
         width:96%;margin-left:2%;
         font-size:0.6em;
     }
+    
     text-align:center;
     table{
         display: table;
