@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 const Board = styled.div`
     font-family: 'Nanum Gothic', sans-serif;
     width: 30%;height:370px;border-right:1px solid RGB(200,200,200);display:inline-block;margin: 0 auto;margin-top:30px;
-
     div{
         width:80%;height:100%;margin-top:2.5%;text-align:left;overflow:hidden;
         .heading{

@@ -33,6 +33,7 @@ const Wrapper = styled.div`
     .copyRight{
         width:100%;height:10%;text-align:Center;color:RGB(170,170,170);
     }
+    
 `;
 const STYLED = {
     footer:{
@@ -40,6 +41,7 @@ const STYLED = {
         height:'320px',
         marginTop:'100px',
     }
+
 }
 
 const Footer = () => {
@@ -71,7 +73,7 @@ const Footer = () => {
                         <p>ALL RIGHT RESERVED</p>
                         <br/>
                     </div>
-                    
+
                 </Wrapper>
             </footer>
         </>

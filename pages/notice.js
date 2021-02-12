@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import MenuLink from '../components/MenuLink.jsx';
 import Table from '../components/Table.jsx';
 
+
 const IMG_WRAPPER = styled.div`
     width:100%;height:300px;background-image:url("/imgs/typing.jpg");margin-top:70px;
     background-repeat: no-repeat;background-position:center;background-size:cover;top:-1px;

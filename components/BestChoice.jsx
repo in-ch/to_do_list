@@ -51,8 +51,6 @@ const BestChoiceBox = styled.div`
     }
 
 `;
-
-
 const BestChoiceBoxSecond = styled.div`
     width:20%;padding-bottom:32%;display:inline-block;margin: 0 0 15px 15px;position:relative;
     div:nth-child(2){
@@ -86,13 +84,13 @@ const BestChoiceBoxSecond = styled.div`
             }
         }
     }
+
     @media (max-width: 521px) {
         width:45%;margin: 0 0 25px;padding-bottom:75%;margin-bottom:20px;
     }
     @media (max-width: 281px) {
         width:49%;margin: 0 0 25px;padding-bottom:98%;margin-bottom:20px;
     }
-
     &:hover{
         div:nth-child(2){
             div{

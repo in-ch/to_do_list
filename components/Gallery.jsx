@@ -10,6 +10,7 @@ const SlideWrapper = styled.div`
           height:500px;
         }
     }
+    
     .slick-slide div{
       outline: none; // 슬라이드 클릭시 파란선을 제거하기 위해서 작성
     }

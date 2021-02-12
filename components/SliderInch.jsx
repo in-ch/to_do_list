@@ -127,6 +127,7 @@ const SliderInch = ({slideData}) => {
                             </div>
                         </SlideWrapper>
                     </>
+                    
                 ))}
           </SliderContainer>
           <SliderRemote>

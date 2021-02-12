@@ -1,0 +1,6 @@
+
+@charset "utf-8";
+
+#toastEditor {width:800px}
+#toastEditor .btn_save {width:400px;height:40px;margin-top:20px}
+#toastEditor .tf_result {width:800px;height:300px}
