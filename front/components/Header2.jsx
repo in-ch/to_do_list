@@ -3,6 +3,8 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import SearchInput from './SearchInput.jsx';
+import { Route, Switch } from 'react-router-dom';
+
 
 const HeaderDiv = styled.div`
     width:100%;height:70px;position:fixed;top:0px;left:0px;background:white;z-index:2;
@@ -34,6 +36,12 @@ const MenuWrapperDesktop = styled.div`
         position:fixed;top;0px;left:0px;width:100%;height:2px;background: #4776E6;  /* fallback for old browsers */
         background: -webkit-linear-gradient(to right, #8E54E9, #4776E6);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to right, #8E54E9, #4776E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    .loginJon{
+        width:150px;height:100%;float:right;
+        p{
+            display:inline-block;margin:0 auto;font-size:13px;color:RGB(150,150,150);margin-left:7px;margin-left:7px;position:relative;top:19px;
+        }
     }
 `;
 const MobileLine = styled.div`
@@ -257,7 +265,14 @@ const Header = ({menuText}) => {
                         </>
                     ))}
 
+
                     <div class="loadingHeader" style={Object.assign({}, style.default, loadingHeader ? style.loadingOn : style.loading )} />
+                    <div class="loginJon">
+                        <Link href="../notice"><p>로그인</p></Link>
+                        <p>|</p>
+
+                        <p>회원가입</p>
+                    </div>                        
                 </MenuWrapperDesktop>
                 {mobileShow&& <Cotton />}
                 <MobileLine onClick={mobileShowEvent}  >
