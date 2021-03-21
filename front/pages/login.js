@@ -1,5 +1,7 @@
-import React,{useCallback, useState} from 'react';
+import React,{useCallback, useEffect, useState} from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { LOG_IN_REQUEST } from '../reducers/user';
 
 const LoginWrapper = styled.div`
     position:absolute; 
@@ -24,28 +26,39 @@ const LoginWrapper = styled.div`
         background: linear-gradient(to right, #8E54E9, #4776E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
 `;
+
 const Login = () => {
     const [id, setId] = useState('');
     const [ps, setPs] = useState('');
+    const dispatch = useDispatch();
+
     const onChangeId = useCallback((e)=>{
         setId(e.target.value);
         return;
     });
 
+    const { me } = useSelector((state) => state.user);
     const onChangePs = useCallback((e)=>{
         setPs(e.target.value);
         return;
     });
+    
+    useEffect(()=>{
+        console.log(me);
+    },[me])
 
     const onSubmitForm = useCallback((e)=>{
         e.preventDefault();
-        
-    });
+        dispatch({
+            type: LOG_IN_REQUEST,
+            data: {id, ps},
+        });
+    },[id,ps]);
 
     return (
         <>
             <LoginWrapper>
-                <h1>LOGIN</h1>
+                <h1>{me}</h1>
                 <form onSubmit={onSubmitForm}>
                     <input placeholder="아이디" onChange={onChangeId}/>
                     <input type="password" onChange={onChangePs} placeholder="비밀번호" />
