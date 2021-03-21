@@ -9,7 +9,7 @@ const db = require('./models');
 
 // const postRouter = require('./routes/post');
 // const postsRouter = require('./routes/posts');
-// const userRouter = require('./routes/user');
+const userRouter = require('./routes/user');
 // const hashtagRouter = require('./routes/hashtag');
 const passportConfig = require('./passport');
 
@@ -38,6 +38,10 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 // }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+
+app.use('/user', userRouter);
 
 app.listen('3065', () =>{
     console.log('Hello');

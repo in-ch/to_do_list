@@ -6,17 +6,15 @@ import {
 } from '../reducers/user';
 
 function logInAPI(data) {
-    // return axios.get(`/user/${data}`);
+    return axios.post(`/user`,data);
   }
   
   function* logIn(action) {
     try {
-    //   const result = yield call(logInAPI, action.data);
-      yield delay(1000);
+      const result = yield call(logInAPI, action.data);
       yield put({
         type: LOG_IN_SUCCESS,
-        // data: result.data,
-        data: 'Hello',
+        data: result.data,
       });
     } catch (err) {
       console.error(err);
