@@ -63,7 +63,7 @@ const Login = () => {
         e.preventDefault();
         dispatch({
             type: REGISTER_REQUEST,
-            data: { id, ps },
+            data: { id, ps, nickname },
         });
     },[id, ps]);
 
@@ -72,10 +72,10 @@ const Login = () => {
             <RegisterWrapper>
                 <h1>회원가입</h1>
                 <form onSubmit={onSubmitForm}>
-                    <input placeholder="아이디" onChange={onChangeId}/>
-                    <input type="password" onChange={onChangePs} placeholder="비밀번호" />
-                    <input type="passwordCheck" onChange={onChangePsCheck} placeholder="비밀번호 확인" />
-                    <input placeholder="닉네임" onChange={onChangeNickname} />
+                    <input placeholder="아이디" required onChange={onChangeId}/>
+                    <input type="password" required onChange={onChangePs} placeholder="비밀번호" />
+                    <input type="password" required onChange={onChangePsCheck} placeholder="비밀번호 확인" />
+                    <input placeholder="닉네임" required onChange={onChangeNickname} />
                     <input type="submit" value="회원가입 하기" />
                 </form>
                 <center>

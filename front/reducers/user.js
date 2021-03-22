@@ -48,6 +48,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
         case REGISTER_FAILURE:
             draft.loading = false;
             draft.error = action.error;
+            alert(action.error);
             break;
         default:
             break;
