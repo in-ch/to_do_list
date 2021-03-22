@@ -111,7 +111,6 @@ const Cotton = styled.div`
     }
 `;
 
-
 const SubMenu = styled.div`
     width: 100%;height: 78%;background:white;position:relative;
     div:nth-child(1){

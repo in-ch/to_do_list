@@ -17,4 +17,14 @@ router.post('/', async (req, res, next) => { // GET /user
   }
 });
 
+router.post('/register', async (req, res, next) => { // GET /user
+  try {
+      res.status(200).send(req.user);
+  } catch (error) {
+    console.error(error);
+ next(error);
+}
+});
+
+
 module.exports = router;

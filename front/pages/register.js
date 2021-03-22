@@ -1,10 +1,10 @@
 import React,{ useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { LOG_IN_REQUEST } from '../reducers/user';
+import { REGISTER_REQUEST } from '../reducers/user';
 import Link from 'next/link';
 
-const LoginWrapper = styled.div`
+const RegisterWrapper = styled.div`
     position:absolute; 
     top:50%; left:50%;
     margin-top:-300px; margin-left:-300px; 
@@ -31,19 +31,30 @@ const LoginWrapper = styled.div`
 const Login = () => {
     const [id, setId] = useState('');
     const [ps, setPs] = useState('');
+    const [psCheck, setPsCheck] = useState('');
+    const [nickname, setNickname] = useState('');
+    
+    const { me } = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
     const onChangeId = useCallback((e)=>{
         setId(e.target.value);
         return;
     });
-
-    const { me } = useSelector((state) => state.user);
     const onChangePs = useCallback((e)=>{
         setPs(e.target.value);
         return;
     });
-    
+    const onChangePsCheck = useCallback((e)=>{
+        setPsCheck(e.target.value);
+        return;
+    });
+    const onChangeNickname = useCallback((e)=>{
+        setNickname(e.target.value);
+        return;
+    });
+
+
     useEffect(()=>{
         console.log(me);
     },[me]);
@@ -51,26 +62,27 @@ const Login = () => {
     const onSubmitForm = useCallback((e)=>{
         e.preventDefault();
         dispatch({
-            type: LOG_IN_REQUEST,
+            type: REGISTER_REQUEST,
             data: { id, ps },
         });
     },[id, ps]);
 
-
     return (
         <>
-            <LoginWrapper>
-                <h1>{me}</h1>
+            <RegisterWrapper>
+                <h1>회원가입</h1>
                 <form onSubmit={onSubmitForm}>
                     <input placeholder="아이디" onChange={onChangeId}/>
                     <input type="password" onChange={onChangePs} placeholder="비밀번호" />
-                    <input type="submit" value="로그인하기" />
+                    <input type="passwordCheck" onChange={onChangePsCheck} placeholder="비밀번호 확인" />
+                    <input placeholder="닉네임" onChange={onChangeNickname} />
+                    <input type="submit" value="회원가입 하기" />
                 </form>
                 <center>
                     <br/>
-                    <Link href="./register"><p>회원가입 하기</p></Link>
+                    <Link href="./login"><p>로그인 하기</p></Link>
                 </center>
-            </LoginWrapper>
+            </RegisterWrapper>
         </>
     )
 };
