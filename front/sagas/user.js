@@ -8,7 +8,7 @@ import {
 
 
 function logInAPI(data) {
-  return axios.post(`/user`,data);
+  return axios.post(`/user/login`,data);
 }
   
 function* logIn(action) {

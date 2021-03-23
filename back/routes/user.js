@@ -7,7 +7,7 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 const router = express.Router();
 
-router.post('/', async (req, res, next) => { // GET /user
+router.post('/', async (req, res, next) => {  // 템플릿 
     try {
         res.status(200).send('Hello world');
     } catch (error) {
@@ -16,7 +16,38 @@ router.post('/', async (req, res, next) => { // GET /user
   }
 });
 
-router.post('/register', async (req, res, next) => { // GET /user
+router.post('/login', async (req, res, next) => { // 로그인
+   try {
+      passport.authenticate('local', (err, user, info) => {
+         if (err) {
+           console.error(err);
+           return next(err);
+         }
+         
+         if (info) {
+           return res.status(401).send(info.reason);
+         }
+         return req.login(user, async (loginErr)=> {
+            if(loginErr){
+               console.error(loginErr);
+               return next(loginErr);
+            } 
+            const userInfo = await User.findOne({
+               where: {id : user.id},
+               attributes:{
+                  exclude: ['password'] 
+               },
+            });
+            return res.status(200).send('gg');
+         });
+      });
+   } catch (error) {
+     console.error(error);
+  next(error);
+ }
+});
+
+router.post('/register', isNotLoggedIn, async (req, res, next) => {  // 회원가입
   try {
      const exUser = await User.findOne({
         where: {
