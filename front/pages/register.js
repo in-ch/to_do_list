@@ -2,6 +2,7 @@ import React,{ useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { REGISTER_REQUEST } from '../reducers/user';
+import useInput from '../hooks/useinput';
 import Link from 'next/link';
 
 const RegisterWrapper = styled.div`
@@ -28,43 +29,28 @@ const RegisterWrapper = styled.div`
     }
 `;
 
-const Login = () => {
-    const [id, setId] = useState('');
-    const [ps, setPs] = useState('');
-    const [psCheck, setPsCheck] = useState('');
-    const [nickname, setNickname] = useState('');
+const Register = () => {
+    const [id, onChangeId] = useInput('');
+    const [ps, onChangePs] = useInput('');
+    const [psCheck, onChangePsCheck] = useInput('');
+    const [nickname, onChangeNickname] = useInput('');
     
     const { me } = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
-    const onChangeId = useCallback((e)=>{
-        setId(e.target.value);
-        return;
-    });
-    const onChangePs = useCallback((e)=>{
-        setPs(e.target.value);
-        return;
-    });
-    const onChangePsCheck = useCallback((e)=>{
-        setPsCheck(e.target.value);
-        return;
-    });
-    const onChangeNickname = useCallback((e)=>{
-        setNickname(e.target.value);
-        return;
-    });
-
-
     useEffect(()=>{
-        console.log(me);
     },[me]);
 
     const onSubmitForm = useCallback((e)=>{
         e.preventDefault();
-        dispatch({
-            type: REGISTER_REQUEST,
-            data: { id, ps, nickname },
-        });
+        if(!(ps === psCheck)){
+            alert('비밀번호가 같지 않습니다.');
+        } else {
+            dispatch({
+                type: REGISTER_REQUEST,
+                data: { id, ps, nickname },
+            });
+        }
     },[id, ps]);
 
     return (
@@ -72,10 +58,10 @@ const Login = () => {
             <RegisterWrapper>
                 <h1>회원가입</h1>
                 <form onSubmit={onSubmitForm}>
-                    <input placeholder="아이디" required onChange={onChangeId}/>
-                    <input type="password" required onChange={onChangePs} placeholder="비밀번호" />
-                    <input type="password" required onChange={onChangePsCheck} placeholder="비밀번호 확인" />
-                    <input placeholder="닉네임" required onChange={onChangeNickname} />
+                    <input placeholder="아이디" value={id} required onChange={onChangeId}/>
+                    <input type="password" value={ps} required onChange={onChangePs} placeholder="비밀번호" />
+                    <input type="password" value={psCheck} required onChange={onChangePsCheck} placeholder="비밀번호 확인" />
+                    <input placeholder="닉네임" value={nickname} required onChange={onChangeNickname} />
                     <input type="submit" value="회원가입 하기" />
                 </form>
                 <center>
@@ -87,4 +73,4 @@ const Login = () => {
     )
 };
 
-export default Login;
+export default Register;
