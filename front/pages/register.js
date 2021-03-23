@@ -66,7 +66,7 @@ const Register = () => {
                 </form>
                 <center>
                     <br/>
-                    <Link href="./login"><p>로그인 하기</p></Link>
+                    <Link href="./login"><p>로그인 하러 하기</p></Link>
                 </center>
             </RegisterWrapper>
         </>
