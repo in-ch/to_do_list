@@ -267,10 +267,10 @@ const Header = ({menuText}) => {
 
                     <div class="loadingHeader" style={Object.assign({}, style.default, loadingHeader ? style.loadingOn : style.loading )} />
                     <div class="loginJon">
-                        <Link href="../notice"><p>로그인</p></Link>
+                        <Link href="../login"><p>로그인</p></Link>
                         <p>|</p>
 
-                        <p>회원가입</p>
+                        <Link href="../register"><p>회원가입</p></Link>
                     </div>                        
                 </MenuWrapperDesktop>
                 {mobileShow&& <Cotton />}
