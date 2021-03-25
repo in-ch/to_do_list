@@ -30,18 +30,18 @@ const LoginWrapper = styled.div`
 `;
 
 const Login = () => {
-    const [id, setId] = useState('');
-    const [ps, setPs] = useState('');
+    const [userId, setUserId] = useState('');
+    const [password, setPassword] = useState('');
     const dispatch = useDispatch();
 
     const onChangeId = useCallback((e)=>{
-        setId(e.target.value);
+        setUserId(e.target.value);
         return;
     });
 
     const { me } = useSelector((state) => state.user);
     const onChangePs = useCallback((e)=>{
-        setPs(e.target.value);
+        setPassword(e.target.value);
         return;
     });
     
@@ -49,22 +49,23 @@ const Login = () => {
         console.log(me);
     },[me]);
 
+    
     const onSubmitForm = useCallback((e)=>{
         e.preventDefault();
         dispatch({
             type: LOG_IN_REQUEST,
-            data: { id, ps },
+            data: { userId, password },
         });
-    },[id, ps]);
+    },[userId, password]);
 
 
     return (
         <>
             <LoginWrapper>
-                <h1>{me}</h1>
+                <h1>아이디 : {me}</h1>
                 <form onSubmit={onSubmitForm}>
-                    <input placeholder="아이디" onChange={onChangeId}/>
-                    <input type="password" onChange={onChangePs} placeholder="비밀번호" />
+                    <input name="userId" placeholder="아이디" onChange={onChangeId}/>
+                    <input name="password" type="password" onChange={onChangePs} placeholder="비밀번호" />
                     <input type="submit" value="로그인하기" />
                 </form>
                 <center>

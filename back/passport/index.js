@@ -16,7 +16,6 @@ module.exports = () => {
       done(error);
     }
   });
-
   local();
 };
 
