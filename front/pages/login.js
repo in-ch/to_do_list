@@ -30,20 +30,11 @@ const LoginWrapper = styled.div`
 `;
 
 const Login = () => {
-    const [userId, setUserId] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, onChangeEmail] = useState('');
+    const [password, onChangePassword] = useState('');
     const dispatch = useDispatch();
 
-    const onChangeId = useCallback((e)=>{
-        setUserId(e.target.value);
-        return;
-    });
-
     const { me } = useSelector((state) => state.user);
-    const onChangePs = useCallback((e)=>{
-        setPassword(e.target.value);
-        return;
-    });
     
     useEffect(()=>{
         console.log(me);
@@ -54,9 +45,9 @@ const Login = () => {
         e.preventDefault();
         dispatch({
             type: LOG_IN_REQUEST,
-            data: { userId, password },
+            data: { email, password },
         });
-    },[userId, password]);
+    },[email, password]);
 
 
     return (
@@ -64,8 +55,8 @@ const Login = () => {
             <LoginWrapper>
                 <h1>아이디 : {me}</h1>
                 <form onSubmit={onSubmitForm}>
-                    <input name="userId" placeholder="아이디" onChange={onChangeId}/>
-                    <input name="password" type="password" onChange={onChangePs} placeholder="비밀번호" />
+                    <input name="user-email" placeholder="아이디" type="text" onChange={onChangeEmail}/>
+                    <input name="user-password" placeholder="비밀번호" type="password" onChange={onChangePassword} />
                     <input type="submit" value="로그인하기" />
                 </form>
                 <center>
