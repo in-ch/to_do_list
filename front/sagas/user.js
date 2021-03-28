@@ -8,12 +8,13 @@ import {
 
 
 function logInAPI(data) {
-  return axios.post(`/user/login`,data);
+  return axios.post('/user/login',data);
 }
   
 function* logIn(action) {
   try {
     const result = yield call(logInAPI, action.data);
+    
     yield put({
       type: LOG_IN_SUCCESS,
       data: result.data,

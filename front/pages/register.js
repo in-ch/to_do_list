@@ -43,14 +43,11 @@ const Register = () => {
 
     const onSubmitForm = useCallback((e)=>{
         e.preventDefault();
-        if(!(ps === psCheck)){
-            alert('비밀번호가 같지 않습니다.');
-        } else {
-            dispatch({
-                type: REGISTER_REQUEST,
-                data: { id, ps, nickname },
-            });
-        }
+        
+        dispatch({
+            type: REGISTER_REQUEST,
+            data: { id, ps, nickname },
+        });
     },[id, ps]);
 
     return (

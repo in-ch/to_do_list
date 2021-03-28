@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOG_IN_REQUEST } from '../reducers/user';
 import Link from 'next/link';
+import useInput from '../hooks/useinput';
 
 const LoginWrapper = styled.div`
     position:absolute; 
@@ -30,8 +31,8 @@ const LoginWrapper = styled.div`
 `;
 
 const Login = () => {
-    const [email, onChangeEmail] = useState('');
-    const [password, onChangePassword] = useState('');
+    const [email, onChangeEmail] = useInput('');
+    const [password, onChangePassword] = useInput('');
     const dispatch = useDispatch();
 
     const { me } = useSelector((state) => state.user);
@@ -40,7 +41,6 @@ const Login = () => {
         console.log(me);
     },[me]);
 
-    
     const onSubmitForm = useCallback((e)=>{
         e.preventDefault();
         dispatch({
