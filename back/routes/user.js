@@ -75,6 +75,23 @@ router.post('/login', (req, res, next) => {
    })(req, res, next);
  });
 
-
+ router.get('/loadMyInfo', async (req, res, next) => { // GET /user
+   try {
+     if (req.user) {
+       const fullUserWithoutPassword = await User.findOne({
+         where: { id: req.user.id },
+         attributes: {
+           exclude: ['password']
+         },
+       })
+       res.status(200).json(fullUserWithoutPassword);
+     } else {
+       res.status(200).json(null);
+     }
+   } catch (error) {
+     console.error(error);
+    next(error);
+   }
+ });
 
 module.exports = router;

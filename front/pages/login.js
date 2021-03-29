@@ -38,7 +38,6 @@ const Login = () => {
     const { me } = useSelector((state) => state.user);
     
     useEffect(()=>{
-        console.log(me);
     },[me]);
 
     const onSubmitForm = useCallback((e)=>{
@@ -48,7 +47,6 @@ const Login = () => {
             data: { email, password },
         });
     },[email, password]);
-
 
     return (
         <>
