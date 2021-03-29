@@ -3,6 +3,7 @@ import Head from 'next/head';
 import PropTypes from 'prop-types';
 import wrapper from '../store/configureStore';
 import GlobalStyle from '../components/GlobalStyle.jsx'; 
+import withReduxSaga from 'next-redux-saga';
 
 const App = ({Component}) => (
     <>
@@ -18,4 +19,4 @@ App.propTypes = {
     Component: PropTypes.elementType.isRequired,
 }
 
-export default wrapper.withRedux(App);
+export default wrapper.withRedux(withReduxSaga(App));
