@@ -7,8 +7,13 @@ import BoardPreview from '../components/BoardPreview.jsx';
 import MainPageOnlineConsulting from '../components/MainPageOnlineConsulting';
 import { END } from 'redux-saga';
 import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+
 
 const Home = () => {
+    const dispatch = useDispatch();
+
     const slideData = [
         {"src":"url(http://www.upskin.co.kr/images/main/special/1.jpg)","text":"당신과 함께 합니다."},
         {"src":"url(http://www.upskin.co.kr/images/main/special/2.jpg)","text":"당신과 함께 합니까?"},
@@ -43,6 +48,7 @@ const Home = () => {
         {"type":2,"text":"[안내] 2월 설 연휴 진료 일정","data":"2021-01-29"},
         {"type":3,"text":"엑셀v레이저 기능 강화된 엑스레이","data":"2021-01-29"},
     ];
+
     return (
         <>
             <AppLayout>
@@ -56,21 +62,20 @@ const Home = () => {
     );
 };
 
-// export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
-//     console.log('getServerSideProps start');
-//     console.log(context.req.headers);
-//     const cookie = context.req ? context.req.headers.cookie : '';
-//     axios.defaults.headers.Cookie = '';
-//     if (context.req && cookie) {
-//       axios.defaults.headers.Cookie = cookie;
-//     }
-//     context.store.dispatch({
-//       type: LOAD_MY_INFO_REQUEST,
-//     });
-//     context.store.dispatch(END);
-//     console.log('getServerSideProps end');
-//     await context.store.sagaTask.toPromise();
-//   //sagaTask는 configureStore.js에 정의해놨음. 
-// });
+export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
+    console.log('getServerSideProps start');
+    console.log(context.req.headers);
+    const cookie = context.req ? context.req.headers.cookie : '';
+    axios.defaults.headers.Cookie = '';
+    if (context.req && cookie) {
+      axios.defaults.headers.Cookie = cookie;
+    }
+    context.store.dispatch({
+      type: LOAD_MY_INFO_REQUEST,
+    });
+    context.store.dispatch(END);
+    console.log('getServerSideProps end');
+    await context.store.sagaTask.toPromise(); //sagaTask는 configureStore.js에 정의해놨음. 
+});
 
 export default Home;

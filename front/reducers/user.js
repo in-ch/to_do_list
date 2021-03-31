@@ -45,7 +45,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             break;
         case REGISTER_SUCCESS:
             draft.loading = false;
-            // draft.me = action.data;
+            draft.me = action.data;
             console.log(action.data);
             draft.done = true;
             break;

@@ -53,7 +53,7 @@ function myLoadInfoAPI(data) {
   return axios.post(`/user/loadMyInfo`);
 }
   
-function* loadMyInfo(action) {
+function* loadMyInfo(action) {  
   try {
     const result = yield call(myLoadInfoAPI, action.data);
     yield put({
