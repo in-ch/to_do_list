@@ -50,7 +50,7 @@ router.post('/register', isNotLoggedIn, async (req, res, next) => {  // 회원�
 }
 });
 
-router.post('/login',isNotLoggedIn , (req, res, next) => {
+router.post('/login' , (req, res, next) => {
    passport.authenticate('local', (err, user, info) => {
       if (err) {
          console.error(err);
@@ -75,26 +75,19 @@ router.post('/login',isNotLoggedIn , (req, res, next) => {
    })(req, res, next);
  });
 
- router.post('/loadMyInfo', async (req, res, next) => { 
+ router.get('/loadMyInfo', async (req, res, next) => { 
    try {
-    //  if (req.user) {
-    //    const fullUserWithoutPassword = await User.findOne({
-    //      where: { id: req.user.id },
-    //      attributes: {
-    //        exclude: ['password']
-    //      },
-    //    })
-    //    res.status(200).json(fullUserWithoutPassword);
-    //  } else {
-    //    res.status(200).json(null);
-    //  }
-         const fullUserWithoutPassword = await User.findOne({
-           where: { id: req.user.id },
-           attributes: {
-             exclude: ['password']
-           },
-         })
-         res.status(200).json(fullUserWithoutPassword);
+     if (req.user) {
+       const fullUserWithoutPassword = await User.findOne({
+         where: { id: req.user.id },
+         attributes: {
+           exclude: ['password']
+         },
+       })
+       res.status(200).json(fullUserWithoutPassword);
+     } else {
+       res.status(200).json(req.user);
+     }
    } catch (error) {
      console.error(error);
     next(error);

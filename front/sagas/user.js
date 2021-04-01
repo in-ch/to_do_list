@@ -50,10 +50,10 @@ function* register(action) {
 }
 
 function myLoadInfoAPI(data) {
-  return axios.post(`/user/loadMyInfo`);
+  return axios.get(`/user/loadMyInfo`);
 }
   
-function* loadMyInfo(action) {  
+function* loadMyInfo(action) { 
   try {
     const result = yield call(myLoadInfoAPI, action.data);
     yield put({

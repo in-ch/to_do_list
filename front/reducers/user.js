@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             break;
         case LOG_IN_SUCCESS:
             draft.loading = false;
-            draft.me = action.data.id;
+            draft.me = action.data;
             draft.done = true;
             break;
         case LOG_IN_FAILURE:
@@ -68,7 +68,6 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
         case LOAD_MY_INFO_FAILURE:
             draft.loading = false;
             draft.error = action.error;
-            alert(action.error);
             break;
         default:
             break;
