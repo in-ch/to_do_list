@@ -5,6 +5,7 @@ export const initialState = {
     done: false,
     error: null,
     me: null,
+    userInfo: null,
 };
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
@@ -18,6 +19,10 @@ export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 export const LOAD_MY_INFO_REQUEST = 'LOAD_MY_INFO_REQUEST';
 export const LOAD_MY_INFO_SUCCESS = 'LOAD_MY_INFO_SUCCESS';
 export const LOAD_MY_INFO_FAILURE = 'LOAD_MY_INFO_FAILURE';
+
+export const LOAD_USER_INFO_REQUEST = 'LOAD_USER_INFO_REQUEST';
+export const LOAD_USER_INFO_SUCCESS = 'LOAD_USER_INFO_SUCCESS';
+export const LOAD_USER_INFO_FAILURE = 'LOAD_USER_INFO_FAILURE';
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {  
     switch (action.type) {
@@ -66,6 +71,21 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             draft.done = true;
             break;
         case LOAD_MY_INFO_FAILURE:
+            draft.loading = false;
+            draft.error = action.error;
+            break;
+
+        case LOAD_USER_INFO_REQUEST:
+            draft.loading = true;
+            draft.error = null;
+            draft.done = false;
+            break;
+        case LOAD_USER_INFO_SUCCESS:
+            draft.loading = false;
+            draft.userInfo = action.data;
+            draft.done = true;
+            break;
+        case LOAD_USER_INFO_FAILURE:
             draft.loading = false;
             draft.error = action.error;
             break;

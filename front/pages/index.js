@@ -65,8 +65,8 @@ const Home = () => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
-    const cookie = context.req ? context.req.headers.cookie : '';
+export const getServerSideProps = wrapper.getServerSideProps(async (context) => {    // 접속한 상황에 따라 데이터가 바뀌면 getServerSideProps를 쓰고 데이터가 바뀔 일이 없으면 getStaticProps를 씀. 웬만하면 getServerSideProps를 씀,,
+    const cookie = context.req ? context.req.headers.cookie : '';                    // 걍 블로그글 같이 글 내용이 잘 안바뀌면 getStaticProps가 좋음. 
     axios.defaults.headers.Cookie = '';
     if (context.req && cookie) {
         axios.defaults.headers.Cookie = cookie;

@@ -1,10 +1,11 @@
-import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
+import { all, fork, put, takeLatest, call, delay } from 'redux-saga/effects';
 import axios from 'axios';
 
 import {
     LOG_IN_FAILURE, LOG_IN_SUCCESS, LOG_IN_REQUEST,
     REGISTER_FAILURE, REGISTER_SUCCESS, REGISTER_REQUEST,
     LOAD_MY_INFO_FAILURE, LOAD_MY_INFO_SUCCESS, LOAD_MY_INFO_REQUEST,
+    LOAD_USER_INFO_FAILURE, LOAD_USER_INFO_SUCCESS, LOAD_USER_INFO_REQUEST,
 } from '../reducers/user';
 
 
@@ -69,6 +70,28 @@ function* loadMyInfo(action) {
   }
 }
 
+function loadUserInfoAPI(data) {
+  return axios.get(`/user/userInfo/${data}`);
+}
+  
+function* loadUserInfo(action) { 
+  try {
+    const result = yield call(loadUserInfoAPI, action.data);
+    yield delay(2000);
+    yield put({
+      type: LOAD_USER_INFO_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_USER_INFO_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+
 
 function* watchLogIn() {
     yield takeLatest(LOG_IN_REQUEST, logIn);
@@ -81,11 +104,17 @@ function* watchRegister() {
 function* watchLoadMyInfo() {
   yield takeLatest(LOAD_MY_INFO_REQUEST, loadMyInfo);
 }
+
+function* watchLoadUserInfo() {
+  yield takeLatest(LOAD_USER_INFO_REQUEST, loadUserInfo);
+}
+  
   
 export default function* userSaga() {
   yield all([
     fork(watchLogIn),
     fork(watchRegister),
     fork(watchLoadMyInfo),
+    fork(watchLoadUserInfo),
   ]);
 }

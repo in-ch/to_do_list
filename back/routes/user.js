@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const { User } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+const user = require('../models/user');
 
 const router = express.Router();
 
@@ -86,12 +87,37 @@ router.post('/login' , (req, res, next) => {
        })
        res.status(200).json(fullUserWithoutPassword);
      } else {
-       res.status(200).json(req.user);
+       res.status(200).json(null);
      }
    } catch (error) {
      console.error(error);
-    next(error);
+     next(error);
    }
  });
+
+router.get('/userInfo/1', async (req, res, next) => { 
+  try {
+    // const user = await User.findOne({
+    //   where: {
+    //     id: req.params.userId,
+    //   }
+    // });
+    res.status(200).send(null);
+    // if(!user){
+    //   res.status(404).send('존재하지 않는 게시글입니다.');
+    // }
+
+    // const fullUserWithoutPassword = await User.findOne({
+    //   where: { id: user.id },
+    //   attributes: {
+    //     exclude: ['password']
+    //   },
+    // });
+    //   res.status(200).json(fullUserWithoutPassword);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
 
 module.exports = router;
