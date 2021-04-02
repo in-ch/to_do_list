@@ -77,7 +77,6 @@ function loadUserInfoAPI(data) {
 function* loadUserInfo(action) { 
   try {
     const result = yield call(loadUserInfoAPI, action.data);
-    yield delay(2000);
     yield put({
       type: LOAD_USER_INFO_SUCCESS,
       data: result.data,

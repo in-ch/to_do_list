@@ -95,25 +95,24 @@ router.post('/login' , (req, res, next) => {
    }
  });
 
-router.get('/userInfo/1', async (req, res, next) => { 
+router.get('/userInfo/:userId', async (req, res, next) => { 
   try {
-    // const user = await User.findOne({
-    //   where: {
-    //     id: req.params.userId,
-    //   }
-    // });
-    res.status(200).send(null);
-    // if(!user){
-    //   res.status(404).send('존재하지 않는 게시글입니다.');
-    // }
+    const user = await User.findOne({
+      where: {
+        id: req.params.userId,
+      }
+    });
+    if(!user){
+      res.status(404).send('존재하지 않는 게시글입니다.');
+    }
 
-    // const fullUserWithoutPassword = await User.findOne({
-    //   where: { id: user.id },
-    //   attributes: {
-    //     exclude: ['password']
-    //   },
-    // });
-    //   res.status(200).json(fullUserWithoutPassword);
+    const fullUserWithoutPassword = await User.findOne({
+      where: { id: user.id },
+      attributes: {
+        exclude: ['password']
+      },
+    });
+      res.status(200).json(fullUserWithoutPassword);
   } catch (error) {
     console.error(error);
     next(error);
