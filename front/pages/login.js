@@ -8,6 +8,7 @@ import axios from 'axios';
 import wrapper from '../store/configureStore';
 import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 import { END } from 'redux-saga';
+import moment from 'moment';
 
 const LoginWrapper = styled.div`
     position:absolute; 
@@ -33,6 +34,8 @@ const LoginWrapper = styled.div`
     }
     
 `;
+
+moment.locale('ko');
 
 const Login = () => {
     const [email, onChangeEmail] = useInput('');
@@ -62,6 +65,11 @@ const Login = () => {
                 </form>
                 <center>
                     <br/>
+                    <div style={{float:'right'}}>
+                        {
+                            moment("20210402","YYYYMMDD").fromNow()
+                        }
+                    </div>
                     <Link href="./register"><p>회원가입 하기</p></Link>
                 </center>
             </LoginWrapper>
