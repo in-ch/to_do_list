@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "ANALYZE=true NODE_ENV=production next build"
-  },
+  }, 
   "repository": {
     "type": "git",
     "url": "git+https://github.com/in-ch/to_do_list.git"
