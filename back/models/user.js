@@ -1,9 +1,9 @@
-const db = require(".");
-const { sequelize } = require(".");
+const DataTypes = require('sequelize');
+const { Model } = DataTypes;
 
-module.exports = (sequelize, DataTypes) => {
-    const User = sequelize.define('User', {   //MySQL에는 users 테이블 생성
-        // no은 자동으로 넣어짐
+module.exports = class User extends Model {
+  static init(sequelize) {
+    return super.init({
         email: {
             type: DataTypes.STRING(30), // STRONG, TEXT, BOOLEAN, INTEGER, FLOAT, DATETIME
             allowNull: false, // 필 수 
@@ -17,15 +17,16 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false, // 필 수 
         },
     }, {
-        charset: 'utf8',
-        collate: 'utf8_general_ci', // 한글 저장        
+      modelName: 'User',
+      tableName: 'users',
+      charset: 'utf8mb4',
+      collate: 'utf8mb4_general_ci', // 이모티콘 저장
+      sequelize,
     });
-    // User.associate = (db) => {
-    //     db.User.hasMany(db.Post);
-    //     db.User.hasMany(db.Comment);
-    //     db.User.belongsToMany(db.Post, {through: 'Like', as: 'Liked'});   // 다대다 테이블 이름 through에서 정해줄 수 있다. as는 뭐지?
-    //     db.User.belongsToMany(db.User, { through: 'Follow', as: 'Followers', foreignKey: 'FollowingId'});   // foreignKey를 적어야하는 이유는 먼저 뭐를 검색해야하는 지 알아야해서
-    //     db.User.belongsToMany(db.User, { through: 'Follow', as: 'Followings', foreignKey: 'FollowerId'});
-    // };
-    return User;
+  }
+
+  static associate(db) {
+    // db.Comment.belongsTo(db.User);
+    // db.Comment.belongsTo(db.Post);
+  }
 };
