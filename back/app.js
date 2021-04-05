@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(hpp());
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(cors({
-    origin: 'http://nodebird.com',
+    origin: ['http://localhost:3000','incheolisbest.com'],
     credentials: true,
   }));
 } else {
@@ -41,11 +41,6 @@ if (process.env.NODE_ENV === 'production') {
   }));
 }
 
-app.use(morgan('dev'));
-app.use(cors({
-  origin: ['http://localhost:3000','incheolisbest.com'],
-  credentials: true,
-}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
