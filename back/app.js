@@ -5,15 +5,13 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
-const db = require('./models');
-const hpp = require('hpp');
 const path = require('path');
+const hpp = require('hpp');
 const helmet = require('helmet');
 
-// const postRouter = require('./routes/post');
-// const postsRouter = require('./routes/posts');
+
 const userRouter = require('./routes/user');
-// const hashtagRouter = require('./routes/hashtag');
+const db = require('./models');
 const passportConfig = require('./passport');
 
 dotenv.config();
@@ -30,7 +28,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(hpp());
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(cors({
-    origin: ['http://localhost:3000','incheolisbest.com'],
+    origin: ['localhost:3000','http://inchelisbest.com'],
     credentials: true,
   }));
 } else {
@@ -40,7 +38,7 @@ if (process.env.NODE_ENV === 'production') {
     credentials: true,
   }));
 }
-
+app.use('/', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -48,18 +46,21 @@ app.use(session({
   saveUninitialized: false,
   resave: false,
   secret: process.env.COOKIE_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+    domain: process.env.NODE_ENV === 'production' && '.incheolisbest.com'
+  },
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-
-app.use('/user', userRouter);
 
 app.get('/', (req, res) => {
   res.send('hello express');
 });
 
-app.listen('3065', () =>{
-  console.log('Hello');
+app.use('/user', userRouter);
+
+app.listen(3065, () => {
+  console.log('서버 실행 중!');
 });
