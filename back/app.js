@@ -25,13 +25,22 @@ db.sequelize.sync()
   .catch(console.error);
 passportConfig();
 
-if(process.env.NODE_ENV === 'production'){
+if (process.env.NODE_ENV === 'production') {
   app.use(morgan('combined'));
   app.use(hpp());
-  app.use(helmet());
+  app.use(helmet({ contentSecurityPolicy: false }));
+  app.use(cors({
+    origin: 'http://nodebird.com',
+    credentials: true,
+  }));
 } else {
   app.use(morgan('dev'));
+  app.use(cors({
+    origin: true,
+    credentials: true,
+  }));
 }
+
 app.use(morgan('dev'));
 app.use(cors({
   origin: ['http://localhost:3000','incheolisbest.com'],
