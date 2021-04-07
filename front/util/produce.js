@@ -4,5 +4,3 @@ export default (...args) => {
   enableES5();
   return produce(...args);
 };
-
-export default produe;
