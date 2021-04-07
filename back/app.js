@@ -9,10 +9,11 @@ const path = require('path');
 const hpp = require('hpp');
 const helmet = require('helmet');
 
-
 const userRouter = require('./routes/user');
 const db = require('./models');
 const passportConfig = require('./passport');
+app.use(cookieParser(process.env.COOKIE_SECRET));
+
 
 dotenv.config();
 const app = express();
@@ -41,7 +42,6 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
   saveUninitialized: false,
   resave: false,
