@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(hpp());
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(cors({
-    origin: ['localhost:3000','http://inchelisbest.com'],
+    origin: ['http://52.79.172.238','http://inchelisbest.com'],
     credentials: true,
   }));
 } else {
