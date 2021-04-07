@@ -23,14 +23,21 @@ db.sequelize.sync()
   .catch(console.error);
 passportConfig();
 
-
-app.use(morgan('dev'));
-app.use(cors({
-  origin: true,
-  credentials: true,
-}));
-
-
+if (process.env.NODE_ENV === 'production') {
+  app.use(morgan('combined'));
+  app.use(hpp());
+  app.use(helmet({ contentSecurityPolicy: false }));
+  app.use(cors({
+    origin: ['localhost:3000','http://inchelisbest.com'],
+    credentials: true,
+  }));
+} else {
+  app.use(morgan('dev'));
+  app.use(cors({
+    origin: true,
+    credentials: true,
+  }));
+}
 app.use('/', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -39,6 +46,11 @@ app.use(session({
   saveUninitialized: false,
   resave: false,
   secret: process.env.COOKIE_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+    domain: process.env.NODE_ENV === 'production' && '.incheolisbest.com'
+  },
 }));
 app.use(passport.initialize());
 app.use(passport.session());
