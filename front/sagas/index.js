@@ -5,7 +5,7 @@ import { backUrl } from '../config/config.js';
 // import postSaga from './post';
 import userSaga from './user';
 
-axios.defaults.baseURL = 'http://52.78.106.219';
+axios.defaults.baseURL = backUrl;
 axios.defaults.withCredentials = true;
 
 export default function* rootSaga() {

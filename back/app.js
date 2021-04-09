@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(hpp());
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(cors({
-    origin: ['http://52.79.172.238','http://inchelisbest.com'],
+    origin: ['http://52.79.172.238','http://inchelisbest.com', 'http://localhost:3000'],
     credentials: true,
   }));
 } else {
@@ -61,6 +61,6 @@ app.get('/', (req, res) => {
 
 app.use('/user', userRouter);
 
-app.listen(80, () => {
+app.listen(3065, () => {
   console.log('서버 실행 중!');
 });
