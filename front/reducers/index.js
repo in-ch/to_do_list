@@ -3,6 +3,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { combineReducers } from 'redux';
 
 import user from './user';
+import upload from './upload';
 
 // (이전상태, 액션) => 다음상태
 const rootReducer = (state, action) => {
@@ -12,6 +13,7 @@ const rootReducer = (state, action) => {
     default: {
       const combinedReducer = combineReducers({
         user,
+        upload
       });
       return combinedReducer(state, action);
     }

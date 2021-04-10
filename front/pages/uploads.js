@@ -10,11 +10,18 @@ import axios from 'axios';
 
 const ImgUploader = () => {
     const dispatch = useDispatch();
-
+    const uploadImg = useCallback((e) => {
+        const imageFormData = new FormData();
+        [].forEach.call(e.target.files, (f)=> {
+            imageFormData.append('image',f);
+        });
+        console.log(imageFormData);
+    });
+    
     return (
         <>
             <div>
-                <p>Hello</p>
+                <input type="file" encType="multipart/form-data" onClick={uploadImg} />
             </div>
         </>
     )
