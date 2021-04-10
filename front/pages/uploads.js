@@ -1,7 +1,7 @@
 import React,{ useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { LOG_IN_REQUEST } from '../reducers/user';
+import { UPLOAD_REQUEST } from '../reducers/upload';
 import Link from 'next/link';
 import useInput from '../hooks/useinput';
 import axios from 'axios';
@@ -10,18 +10,26 @@ import axios from 'axios';
 
 const ImgUploader = () => {
     const dispatch = useDispatch();
+    const { imagePaths } = useSelector((state) => state.upload);
     const uploadImg = useCallback((e) => {
-        const imageFormData = new FormData();
-        [].forEach.call(e.target.files, (f)=> {
-            imageFormData.append('image',f);
+        e.preventDefault();
+        const formData = new FormData();
+        imagePaths.forEach((p) => {
+          formData.append('image', p);
         });
-        console.log(imageFormData);
-    });
+        return dispatch({
+          type: UPLOAD_REQUEST,
+          data: formData,
+        });
+    },[imagePaths]);
     
     return (
         <>
             <div>
-                <input type="file" encType="multipart/form-data" onClick={uploadImg} />
+                <form onSubmit={ImgUploader} encType="multipart/form-data">
+                    <input type="file"  />
+                    <input type="submit" value={`전송하기`}/>
+                </form>
             </div>
         </>
     )
