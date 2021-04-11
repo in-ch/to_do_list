@@ -29,19 +29,10 @@ const upload = multer({
 
 router.get('/upload/imgUpload', async (req, res, next) => { 
   try {
-    if (req.body.image) {
-        if (Array.isArray(req.body.image)) { 
-          const images = await Promise.all(req.body.image.map((image) => Image.create({ src: image })));
-          await post.addImages(images);
-        } else { // 이미지를 하나만 올리면 image: 제로초.png
-          const image = await Image.create({ src: req.body.image });
-          await post.addImages(image);
-        }
-        res.status().send('이미지가 생성되었습니다. ');
-      }
-    else {
-        res.status(200).send('이미지가 없습니다.');
-    }
+    router.post('/images', isLoggedIn, upload.array('image'), (req, res, next) => { // POST /post/images
+      console.log(req.files);
+      res.json(req.files.map((v) => v.filename));
+    });
   } catch (error) {
     console.error(error);
     next(error);

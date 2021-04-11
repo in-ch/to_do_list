@@ -1,7 +1,7 @@
 import React,{ useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { UPLOAD_REQUEST } from '../reducers/upload';
+import { UPLOAD_IMAGES_REQUEST} from '../reducers/upload';
 import Link from 'next/link';
 import useInput from '../hooks/useinput';
 import axios from 'axios';
@@ -10,24 +10,25 @@ import axios from 'axios';
 
 const ImgUploader = () => {
     const dispatch = useDispatch();
-    const { imagePaths } = useSelector((state) => state.upload);
-    const uploadImg = useCallback((e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        imagePaths.forEach((p) => {
-          formData.append('image', p);
+    // const { imagePaths } = useSelector((state) => state.upload);
+    
+    const onChangeImages = useCallback((e) => {
+        console.log('images', e.target.files);
+        const imageFormData = new FormData();
+        [].forEach.call(e.target.files, (f) => {
+          imageFormData.append('image', f);
         });
-        return dispatch({
-          type: UPLOAD_REQUEST,
-          data: formData,
+        dispatch({
+          type: UPLOAD_IMAGES_REQUEST,
+          data: imageFormData,
         });
-    },[imagePaths]);
+    }, []);
     
     return (
         <>
             <div>
-                <form onSubmit={ImgUploader} encType="multipart/form-data">
-                    <input type="file"  />
+                <form onSubmit={uploadImg} encType="multipart/form-data">
+                    <input type="file"  onChange={onChangeImages} />
                     <input type="submit" value={`전송하기`}/>
                 </form>
             </div>
