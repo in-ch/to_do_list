@@ -11,6 +11,10 @@ export const UPLOAD_IMAGES_REQUEST = 'UPLOAD_IMAGES_REQUEST';
 export const UPLOAD_IMAGES_SUCCESS = 'UPLOAD_IMAGES_SUCCESS';
 export const UPLOAD_IMAGES_FAILURE = 'UPLOAD_IMAGES_FAILURE';
 
+export const CONTENT_UPLOAD_REQUEST = 'CONTENT_UPLOAD_REQUEST';
+export const CONTENT_UPLOAD_SUCCESS = 'CONTENT_UPLOAD_SUCCESS';
+export const CONTENT_UPLOAD_FAILURE = 'CONTENT_UPLOAD_FAILURE';
+
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {  
     switch (action.type) {
@@ -29,6 +33,21 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             draft.loading = false;
             draft.error = action.error;
             break;
+
+        case CONTENT_UPLOAD_REQUEST:
+            draft.loading = true;
+            draft.error = null;
+            draft.done = false;
+            break;
+        case CONTENT_UPLOAD_SUCCESS:
+            draft.loading = false;
+            draft.done = true;
+            break;
+        case CONTENT_UPLOAD_FAILURE:
+            draft.loading = false;
+            draft.error = action.error;
+            break;
+
         default:
             break;
     }
