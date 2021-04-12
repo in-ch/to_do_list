@@ -1,6 +1,6 @@
 import produce from '../util/produce';
 
-export const uploadInitialState = {
+export const initialState = {
     loading: false,
     done: false,
     error: null,
@@ -12,7 +12,7 @@ export const UPLOAD_IMAGES_SUCCESS = 'UPLOAD_IMAGES_SUCCESS';
 export const UPLOAD_IMAGES_FAILURE = 'UPLOAD_IMAGES_FAILURE';
 
 
-const reducer = (state = uploadInitialState, action) => produce(state, (draft) => {  
+const reducer = (state = initialState, action) => produce(state, (draft) => {  
     switch (action.type) {
         case UPLOAD_IMAGES_REQUEST:
             draft.loading = true;

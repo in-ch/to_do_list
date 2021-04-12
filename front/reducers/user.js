@@ -26,7 +26,6 @@ export const LOAD_USER_INFO_FAILURE = 'LOAD_USER_INFO_FAILURE';
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {  
     switch (action.type) {
-
         case LOG_IN_REQUEST:
             draft.loading = true;
             draft.error = null;

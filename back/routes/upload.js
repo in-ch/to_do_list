@@ -1,15 +1,16 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const multer = require('path');
-const path = require('fs');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 const router = express.Router();
 
 try {
-    path.fstat.accessSync('uploads');
+    fs.accessSync('uploads');
 } catch (error) {
     console.log('uploads 폴더가 없으므로 생성합니다.');
-    path.fstat.mkdirSync('uploads');
+    fs.mkdirSync('uploads');
 }
 
 const upload = multer({
@@ -27,16 +28,9 @@ const upload = multer({
   });
 
 
-router.get('/upload/imgUpload', async (req, res, next) => { 
-  try {
-    router.post('/images', isLoggedIn, upload.array('image'), (req, res, next) => { // POST /post/images
-      console.log(req.files);
-      res.json(req.files.map((v) => v.filename));
-    });
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
+router.post('/imgUpload', upload.array('image'), (req, res, next) => {
+    console.log(req.files);
+    res.json(req.files.map((v) => v.filename));
 });
 
 module.exports = router;

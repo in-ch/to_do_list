@@ -7,7 +7,7 @@ import {
 
 
 function imgUploadAPI(data) {
-  return axios.get(`/upload/imgUpload`);
+  return axios.post(`/upload/imgUpload`, data);
 }
   
 function* imgUpload(action) { 

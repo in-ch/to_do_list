@@ -11,6 +11,8 @@ const helmet = require('helmet');
 
 
 const userRouter = require('./routes/user');
+const uploadRouter = require('./routes/upload');
+
 const db = require('./models');
 const passportConfig = require('./passport');
 
@@ -60,6 +62,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/user', userRouter);
+app.use('/upload', uploadRouter);
 
 app.listen(3065, () => {
   console.log('서버 실행 중!');
