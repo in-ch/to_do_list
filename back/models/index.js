@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
 const user = require('./user');
+const post = require('./post');
+const image = require('./image');
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config')[env];
@@ -14,6 +16,8 @@ Object.keys(db).forEach(modelName => {  // 반복문 돌면서 db 만들고 연�
 });
 
 db.User = user;
+db.Post = post;
+db.Image = image;
 
 Object.keys(db).forEach(modelName => {
   db[modelName].init(sequelize);
