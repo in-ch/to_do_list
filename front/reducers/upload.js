@@ -41,6 +41,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             break;
         case CONTENT_UPLOAD_SUCCESS:
             draft.loading = false;
+            console.log(action.data);
             draft.done = true;
             break;
         case CONTENT_UPLOAD_FAILURE:

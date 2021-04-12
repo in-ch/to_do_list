@@ -95,6 +95,7 @@ router.post('/login' , (req, res, next) => {
    }
  });
 
+
 router.get('/userInfo/:userId', async (req, res, next) => { 
   try {
     const user = await User.findOne({

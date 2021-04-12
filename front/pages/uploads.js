@@ -33,9 +33,8 @@ const ImgUploader = () => {
             imagePaths.forEach((p) => {
             formData.append('image', p);
         });
-        formData.append('content', text);
         return dispatch({
-            type: ADD_POST_REQUEST,
+            type: CONTENT_UPLOAD_REQUEST,
             data: formData,
         });
     },[text,imagePaths]);

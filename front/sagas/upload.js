@@ -54,7 +54,7 @@ function* watchImgUpload() {
 }
 
 function* watchContentUpload() {
-  yield takeLatest(UPLOAD_IMAGES_REQUEST, contentUpload);
+  yield takeLatest(CONTENT_UPLOAD_REQUEST, contentUpload);
 }
   
   

@@ -38,4 +38,15 @@ router.post('/imgUpload', upload.array('image'), (req, res, next) => {
     res.json(req.files.map((v) => v.filename));
 });
 
+router.post('/contentUpload', async (req, res, next) => { 
+  try {
+    res.status(200).send(req.body);
+
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}); 
+
+
 module.exports = router;
