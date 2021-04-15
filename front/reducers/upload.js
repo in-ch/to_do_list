@@ -26,7 +26,6 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
         case UPLOAD_IMAGES_SUCCESS:
             draft.loading = false;
             draft.imagePaths = action.data;
-            console.log(draft.imagePaths);
             draft.done = true;
             break;
         case UPLOAD_IMAGES_FAILURE:

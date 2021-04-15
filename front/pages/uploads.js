@@ -9,7 +9,7 @@ import axios from 'axios';
 const ImgUploader = () => {
     const { imagePaths } = useSelector((state) => state.upload);
     const dispatch = useDispatch();
-    const [text, onChangeText] = useInput('');
+    const [text, onChangeText, setText] = useInput('');
 
     const onChangeImages = useCallback((e) => {
         const imageFormData = new FormData();
@@ -24,15 +24,17 @@ const ImgUploader = () => {
     
     const onSubmitEvent = useCallback((e)=>{
         e.preventDefault();
-        
         if(!text || !text.trim()){
             alert('텍스트를 입력해주세요.');
             return;
         } 
         const formData = new FormData();
             imagePaths.forEach((p) => {
+            console.log(p);
             formData.append('image', p);
         });
+        formData.append('content', text);
+        
         return dispatch({
             type: CONTENT_UPLOAD_REQUEST,
             data: formData,

@@ -8,6 +8,8 @@ const router = express.Router();
 const multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
 
+const { Post, Image } = require('../models');
+
 try {
     fs.accessSync('uploads');
 } catch (error) {
@@ -20,6 +22,7 @@ AWS.config.update({
   secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
   region: 'ap-northeast-2',
 });
+
 
 const upload = multer({
   storage: multerS3({
@@ -34,14 +37,25 @@ const upload = multer({
 
 
 router.post('/imgUpload', upload.array('image'), (req, res, next) => {
-    console.log(req.files);
-    res.json(req.files.map((v) => v.filename));
+  console.log(req.files);
+  res.status(200).json(req.files.map((v) => v.location.replace(/\/original\//, '/thumb/')));
 });
 
-router.post('/contentUpload', async (req, res, next) => { 
+router.post('/contentUpload', upload.none(), async (req, res, next) => { 
   try {
-    res.status(200).send(req.body);
-
+    const post = await Post.create({
+      content: req.body.content,
+    });
+    if (req.body.image) {
+      if (Array.isArray(req.body.image)) { // 이미지를 여러 개 올리면 image: [제로초.png, 부기초.png]
+        const images = await Promise.all(req.body.image.map((image) => Image.create({ src: image })));
+        await post.addImages(images);
+      } else { // 이미지를 하나만 올리면 image: 제로초.png
+        const image = await Image.create({ src: req.body.image });
+        await post.addImages(image);
+      }
+    }
+    res.status(200).send('Good');
   } catch (error) {
     console.error(error);
     next(error);
