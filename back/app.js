@@ -64,6 +64,6 @@ app.get('/', (req, res) => {
 app.use('/user', userRouter);
 app.use('/upload', uploadRouter);
 
-app.listen(3065, () => {
+app.listen(80, () => {
   console.log('서버 실행 중!');
 });
